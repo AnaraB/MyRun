@@ -1,0 +1,2 @@
+# MyRun
+Log running workout
