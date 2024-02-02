@@ -1,4 +1,3 @@
-
 * {
   margin: 0;
   padding: 0;
@@ -18,13 +17,13 @@ body {
 
 /* SIDEBAR */
 .sidebar {
-  background-color:  #3A5A40;
+  background-color: #3A5A40;
   padding: 3rem 5rem 4rem 5rem;
 }
 
 .logo {
-   height: 5.2rem;
-   color: #e9edef;
+  height: 5.2rem;
+  color: #e9edef;
 
 }
 
@@ -41,5 +40,5 @@ body {
 
 .form-bg {
   background-color: #588157;
-  padding: 1rem ;
+  padding: 1rem;
 }

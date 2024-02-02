@@ -32,3 +32,16 @@ function displayCurrentTime() {
 
 // display currentTime
 setInterval(displayCurrentTime, 1000);
+
+
+// Function // 
+
+  function resetForm() {
+    // Get the form element
+    var form = document.querySelector('.form-bg');
+
+    // Reset the form fields
+    form.reset();
+  }
+
+
