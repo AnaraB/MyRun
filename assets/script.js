@@ -33,15 +33,27 @@ function displayCurrentTime() {
 // display currentTime
 setInterval(displayCurrentTime, 1000);
 
+// --------------------------------Event Listeners---------------------------------------------- // 
 
-// Function // 
+///ClearForm//
 
-  function resetForm() {
-    // Get the form element
+ // Get the form and reset button elements//
+  document.addEventListener('DOMContentLoaded', function () { 
+    
+    // Get the form and reset button elements
     var form = document.querySelector('.form-bg');
+    var resetButton = document.querySelector('.reset-btn');
 
-    // Reset the form fields
-    form.reset();
-  }
+    // Event listener for reset button
+    resetButton.addEventListener('click', function (event) {
+
+      // Prioritise resetting form by preventing defualt function
+      event.preventDefault();
+
+      // Reset the form fields
+      form.reset();
+    });
+  })
+
 
 
