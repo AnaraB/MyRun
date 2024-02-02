@@ -9,13 +9,10 @@ let longitude;
 if(navigator.geolocation)
   navigator.geolocation.getCurrentPosition(
    function(position){
-    console.log(position);
+   // console.log(position);
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
 
-    console.log(latitude);
-    console.log(longitude);
-    //create array to store lattitude and longitude
     const coords = [latitude, longitude];
     
   //store result of set map in the map variable
@@ -25,10 +22,27 @@ if(navigator.geolocation)
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
-  L.marker(coords)
-      .addTo(map)
-      .bindPopup('I am here')
-      .openPopup();
+
+  //add eventListener created by leflet library, it listens to click event on the map
+  map.on('click', function(mapEvent){
+    //get coordinates of the point where it was clicked
+    const lat = mapEvent.latlng.lat;
+    const lng = mapEvent.latlng.lng;
+      //create array to store lattitude and longitude
+      const workoutsCoords = [lat, lng];
+    L.marker(workoutsCoords)
+    .addTo(map)
+    .bindPopup(
+      L.popup({
+        maxWidth: 250,
+        minWidth: 100,
+         closeOnClick: false,
+      })
+    )
+    .setPopupContent('Workout')
+    .openPopup();
+
+  })
 
    }, 
    function(){

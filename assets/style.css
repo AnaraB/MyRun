@@ -40,8 +40,15 @@ body {
   height: 77vh;
 }
 
+.instruction-line{
+  margin: 1.8rem;
+  text-align: center;
+  color: #c7e3fa;
+}
+
 
 .form-bg {
   background-color: #588157;
   padding: 1rem ;
 }
+
