@@ -1,0 +1,45 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 82.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background-color: #fff;
+  padding: 2.5rem;
+}
+
+/* SIDEBAR */
+.sidebar {
+  background-color:  #3A5A40;
+  padding: 3rem 5rem 4rem 5rem;
+}
+
+.logo {
+   height: 5.2rem;
+   color: #e9edef;
+
+}
+
+.logo p {
+  font-size: 1.5rem;
+  color: #c7e3fa;
+}
+
+.workouts {
+  list-style: none;
+  height: 77vh;
+}
+
+
+.form-bg {
+  background-color: #588157;
+  padding: 1rem ;
+}
