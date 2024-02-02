@@ -1,6 +1,26 @@
 //save reference to import DOM elements
 let currentDayEl = $('#currentDay');
 
+// global variables
+let latitude;
+let longitude;
+
+//get position
+if(navigator.geolocation)
+  navigator.geolocation.getCurrentPosition(
+   function(position){
+    console.log(position);
+    latitude = position.coords.latitude;
+    longitude = position.coords.longitude;
+
+    console.log(latitude);
+    console.log(longitude);
+   }, 
+   function(){
+   alert('Could not get your position');
+  }
+  )
+
 
 
 function loadMap (){
