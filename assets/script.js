@@ -15,29 +15,26 @@ if(navigator.geolocation)
 
     console.log(latitude);
     console.log(longitude);
+    //create array to store lattitude and longitude
+    const coords = [latitude, longitude];
+    
+  //store result of set map in the map variable
+    const map = L.map('map').setView( coords, 16);
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  L.marker(coords)
+      .addTo(map)
+      .bindPopup('I am here')
+      .openPopup();
+
    }, 
    function(){
    alert('Could not get your position');
   }
   )
-
-
-
-function loadMap (){
-  const map = L.map('map').setView([51.505, -0.09], 13);
-
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-L.marker([51.5, -0.09]).addTo(map)
-    .bindPopup('Workout date and type')
-    .openPopup();
-
-}
-
-loadMap();
-
 
 
 
