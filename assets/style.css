@@ -13,7 +13,8 @@ html {
 }
 
 body {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Courier New", Courier, monospace;
+  min-height: 100vh;
   background-color: #fff;
   padding: 2.5rem;
 }
@@ -57,12 +58,12 @@ body {
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: "Courier New", Courier, monospace;
 }
 
 .modal-content {
   background: linear-gradient(to left bottom, lightgreen, lightblue);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+  font-family: "Courier New", Courier, monospace;
   padding: 30px;
   border-radius: 15px;
   width: 100%;
