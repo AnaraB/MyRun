@@ -78,15 +78,13 @@ body {
   font-style: italic;
 }
 
-.btn {
-  font-size: 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 10px;
-  margin-top: 15px;
-  text-transform: uppercase;
-  width: 250px;
+.btn-small, .btn {
+  font-size: 25px; /* Adjust the font size as needed */
+  padding: 5px 10px; /* Adjust the padding as needed */
+  width: auto; /* Allow the width to adjust based on content */
+  margin-top: 10px; /* Adjust the margin as needed */
 }
+
 
 /* Media Query */
 @media (max-width: 768px) {
