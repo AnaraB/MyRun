@@ -78,7 +78,11 @@ if (localStorage.getItem('workouts')) {
   });
 }
 
-// Form submission function
+//----------------------Form submission ------------------------//
+//event listener for submission//
+var form = document.querySelector('.form-bg');
+  form.addEventListener('submit', handleFormSubmit);
+
 function handleFormSubmit(event) {
   event.preventDefault();
 
