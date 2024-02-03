@@ -9,35 +9,46 @@ let longitude;
 if(navigator.geolocation)
   navigator.geolocation.getCurrentPosition(
    function(position){
-    console.log(position);
+   // console.log(position);
     latitude = position.coords.latitude;
     longitude = position.coords.longitude;
 
-    console.log(latitude);
-    console.log(longitude);
+    const coords = [latitude, longitude];
+    
+  //store result of set map in the map variable
+    const map = L.map('map').setView( coords, 16);
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+
+  //add eventListener created by leflet library, it listens to click event on the map
+  map.on('click', function(mapEvent){
+    //get coordinates of the point where it was clicked
+    const lat = mapEvent.latlng.lat;
+    const lng = mapEvent.latlng.lng;
+      //create array to store lattitude and longitude
+      const workoutsCoords = [lat, lng];
+    L.marker(workoutsCoords)
+    .addTo(map)
+    .bindPopup(
+      L.popup({
+        maxWidth: 250,
+        minWidth: 100,
+         closeOnClick: false,
+      })
+    )
+    .setPopupContent('Workout')
+    .openPopup();
+
+  })
+
    }, 
    function(){
    alert('Could not get your position');
   }
   )
-
-
-
-function loadMap (){
-  const map = L.map('map').setView([51.505, -0.09], 13);
-
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-L.marker([51.5, -0.09]).addTo(map)
-    .bindPopup('Workout date and type')
-    .openPopup();
-
-}
-
-loadMap();
-
 
 
 
