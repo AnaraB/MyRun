@@ -70,34 +70,57 @@ setInterval(displayCurrentTime, 1000);
 var workouts = [];
 
 // Load workouts from local storage//
-  if (localStorage.getItem('workouts')) {
-    workouts = JSON.parse(localStorage.getItem('workouts'));
-    workouts.forEach(function (workout) {
-      renderWorkoutOnMap(workout);
-      renderWorkoutOnList(workout);
-    });
-  }
-
-
-///ClearForm//
-
-// Wait for content to load first//
-document.addEventListener('DOMContentLoaded', function () {
-
-  // Get the form and reset button elements
-  var form = document.querySelector('.form-bg');
-  var resetButton = document.querySelector('.reset-btn');
-
-  // Event listener for reset button
-  resetButton.addEventListener('click', function (event) {
-
-    // Prioritise resetting form by preventing defualt function
-    event.preventDefault();
-
-    // Reset the form fields
-    form.reset();
+if (localStorage.getItem('workouts')) {
+  workouts = JSON.parse(localStorage.getItem('workouts'));
+  workouts.forEach(function (workout) {
+    renderWorkoutOnMap(workout);
+    renderWorkoutOnList(workout);
   });
-})
+}
+
+// Form submission function
+function handleFormSubmit(event) {
+  event.preventDefault();
+
+  // Get form data
+  var type = document.getElementById('autoSizingSelect').value;
+  var distance = document.getElementById('autoSizingInput').value;
+  var duration = document.getElementById('autoSizingInputGroup').value;
+
+  // Validate data (Ensure data is interger and valid)
+  if (isNaN(parseFloat(distance)) || isNaN(parseFloat(duration))) {
+    return;
+  }
+  
+// Generate new workout obj//
+var newWorkout = {
+  type: type,
+  distance: parseFloat(distance),
+  duration: parseFloat(duration),
+  timestamp: dayjs().format('MMMM D'),
+};
+
+
+
+  ///ClearForm//
+
+  // Wait for content to load first//
+  document.addEventListener('DOMContentLoaded', function () {
+
+    // Get the form and reset button elements
+    var form = document.querySelector('.form-bg');
+    var resetButton = document.querySelector('.reset-btn');
+
+    // Event listener for reset button
+    resetButton.addEventListener('click', function (event) {
+
+      // Prioritise resetting form by preventing defualt function
+      event.preventDefault();
+
+      // Reset the form fields
+      form.reset();
+    });
+  })
 
 
 
