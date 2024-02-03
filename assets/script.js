@@ -1,22 +1,57 @@
-//save reference to import DOM elements
+// Save reference to import DOM elements
 let currentDayEl = document.getElementById('currentDay');
 
+// Global variables
+let latitude;
+let longitude;
 
+// Get position
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(
+    function (position) {
+      // console.log(position);
+      latitude = position.coords.latitude;
+      longitude = position.coords.longitude;
 
-function loadMap (){
-  const map = L.map('map').setView([51.505, -0.09], 13);
+      const coords = [latitude, longitude];
 
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+      // Store result of set map in the map variable
+      const map = L.map('map').setView(coords, 16);
 
-L.marker([51.5, -0.09]).addTo(map)
-    .bindPopup('Workout date and type')
-    .openPopup();
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
 
+      // Add eventListener created by leaflet library, it listens to click event on the map
+      map.on('click', function (mapEvent) {
+        // Get coordinates of the point where it was clicked
+        const lat = mapEvent.latlng.lat;
+        const lng = mapEvent.latlng.lng;
+        // Create array to store latitude and longitude
+        const workoutsCoords = [lat, lng];
+        L.marker(workoutsCoords)
+          .addTo(map)
+          .bindPopup(
+            L.popup({
+              maxWidth: 250,
+              minWidth: 100,
+              closeOnClick: false,
+            })
+          )
+          .setPopupContent('Workout')
+          .openPopup();
+      });
+    }
+  );
 }
 
-loadMap();
+// Function to load the map (assuming this was intended to be a separate function)
+function loadMap() {
+  // Add any code related to loading the map if needed
+}
+
+
+
 
 //handle displaying the time
 function displayCurrentTime() {

@@ -1,3 +1,5 @@
+/* color for buttons
+#5A9F68, #BBD58E */
 
 * {
   margin: 0;
@@ -38,11 +40,18 @@ body {
   height: 77vh;
 }
 
+.instruction-line{
+  margin: 1.8rem;
+  text-align: center;
+  color: #c7e3fa;
+}
+
 
 .form-bg {
   background-color: #588157;
   padding: 1rem ;
 }
+
 
 /* Inspirational quote styles */
 body {
