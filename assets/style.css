@@ -23,8 +23,9 @@ body {
 }
 
 .logo {
-  height: 5.2rem;
-  color: #e9edef;
+   height: 5.2rem;
+   color: #e9edef;
+
 }
 
 .logo p {
@@ -36,6 +37,7 @@ body {
   list-style: none;
   height: 77vh;
 }
+
 
 .form-bg {
   background-color: #588157;
@@ -77,13 +79,13 @@ body {
 }
 
 .btn {
-  font-size: 18px;
+  font-size: 20px;
   border-radius: 5px;
   cursor: pointer;
   padding: 10px;
   margin-top: 15px;
   text-transform: uppercase;
-  width: 300px;
+  width: 250px;
 }
 
 /* Media Query */
