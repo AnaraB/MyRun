@@ -73,19 +73,35 @@
         </div>
     </div> 
 
-    <!-- insiprational quote -->
-    <div class="Mycontainer">
-      <h1 class="heading">Inspirational Quote</h1>
-      <h2 class="quote">
-          <span id="quote">Quote</span>
-      </h2>
-      <p class="author" id="author">~ Author</p>
-      <!-- <button class="btn" id="btn">Get a quote</button> -->
-  </div>
 
-  
-  <button class="btn" id="btn">Get a quote</button>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Motivations</button>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">Current Weather</button>
+
+<!-- Modal -->
+<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Inspirational Quote</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Inspirational quote -->
+        <div class="Mycontainer">
+          <h1 class="heading">Inspirational Quote</h1>
+          <h2 class="quote">
+            <span id="quote">Quote</span>
+          </h2>
+          <p class="author" id="author">~ Author</p>
+        </div>
+        <button class="btn" id="btn">Get a quote</button>
+      </div>
+    </div>
   </div>
+</div>
+
 
   <!-- jQuery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
