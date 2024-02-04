@@ -1,9 +1,15 @@
 //save reference to import DOM elements
-let currentDayEl = $('#currentDay');
+var currentDayEl = $('#currentDay');
+var running = $('.select-type');
+var distance = $('.input-distance');
+var duration = $('.input-duration');
+
+
 
 // global variables
 let latitude;
 let longitude;
+
 
 //get position
 if (navigator.geolocation)
@@ -64,6 +70,7 @@ function displayCurrentTime() {
 setInterval(displayCurrentTime, 1000);
 
 
+
 // ----------------------WorkOut-----------------------------------// 
 
 //Workout Array objects//
@@ -87,9 +94,9 @@ function handleFormSubmit(event) {
   event.preventDefault();
 
   // Get form data
-  var type = document.getElementById('autoSizingSelect').value;
-  var distance = document.getElementById('autoSizingInput').value;
-  var duration = document.getElementById('autoSizingInputGroup').value;
+  running.val();
+  distance.val();
+  duration.val();
 
   // Validate data (Ensure data is interger and valid)
   if (isNaN(parseFloat(distance)) || isNaN(parseFloat(duration))) {
@@ -98,7 +105,7 @@ function handleFormSubmit(event) {
   
 // Generate new workout obj//
 var newWorkout = {
-  type: type,
+  type: running,
   distance: parseFloat(distance),
   duration: parseFloat(duration),
   timestamp: dayjs().format('MMMM D'),
