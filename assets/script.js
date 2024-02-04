@@ -104,13 +104,13 @@ var newWorkout = {
   timestamp: dayjs().format('MMMM D'),
 };
 
-// Add new workout obj workouts array
+// Add new workout obj workouts array//
 workouts.push(newWorkout);
 
-// Save to local storage
+// Save to local storage//
 localStorage.setItem('workouts', JSON.stringify(workouts));
 
-// Mark new workout on map
+// Mark new workout on map//
 renderWorkoutOnMap(newWorkout);
 
 // Add workout on the workout list
