@@ -157,3 +157,6 @@ resetButton.addEventListener('click', function (event) {
   // Reset the form fields
   form.reset();
 });
+
+
+//---------------WeatherAPi------------
