@@ -144,7 +144,6 @@ function handleFormSubmit(event) {
 
 }
 
-
 // Get the reset button element
 var resetButton = document.querySelector('.reset-btn');
 
@@ -158,5 +157,72 @@ resetButton.addEventListener('click', function (event) {
   form.reset();
 });
 
+//------WeatherApp------//
+// Your API key from OpenWeatherMap
+//const apiKey = 3b8c99a3b41dbd2e5ad7ed206d1c29cc;//
 
-//---------------WeatherAPi------------
+function fetchWeatherData(lat, lon) {
+  const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      // Process data 
+      displayWeatherModal(data);
+    })
+    .catch(error => console.error('Error fetching weather data:', error));
+}
+
+function displayWeatherModal(weatherData) {
+  // call  weather information from the response
+  const temperature = weatherData.list[0].main.temp;
+  const description = weatherData.list[0].weather[0].description;
+
+  // Create a modal element
+  const modal = document.createElement("div");
+  modal.classList.add("modal");
+  
+  // Populate modal content with weather information
+  modal.innerHTML = `
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <p>Temperature: ${temperature} K</p>
+      <p>Description: ${description}</p>
+    </div>
+  `;
+
+  // Append modal to the body
+  document.body.appendChild(modal);
+
+  // Display modal
+  modal.style.display = 'block';
+
+  // Add event listener to close the modal
+  const closeBtn = modal.querySelector('.close-btn');
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+}
+
+// Modify your existing click event listener to call fetchWeatherData
+map.on('click', function (mapEvent) {
+  const lat = mapEvent.latlng.lat;
+  const lng = mapEvent.latlng.lng;
+  const workoutsCoords = [lat, lng];
+
+  // Display workout marker on the map
+  L.marker(workoutsCoords)
+    .addTo(map)
+    .bindPopup(
+      L.popup({
+        maxWidth: 250,
+        minWidth: 100,
+        closeOnClick: false,
+      })
+    )
+    .setPopupContent('Workout')
+    .openPopup();
+
+  // Fetch weather data and display in modal
+  fetchWeatherData(lat, lng);
+});
