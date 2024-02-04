@@ -71,9 +71,9 @@ function renderWorkoutOnMap(workouts) {
 };
 
 // Call the render functions with the sample workout
-renderWorkoutOnMap(sampleWorkout);
-renderWorkoutOnList(sampleWorkout);
-
+let workoutsElement = document.querySelector('.workouts');
+let div = document.createElement("div");
+  div.classList.add("workout-item");
 
 function renderWorkoutOnlist(workouts) {
 
@@ -96,7 +96,6 @@ function renderWorkoutOnlist(workouts) {
 
 }
 
-
 //Workout Array objects//
 var workouts = [];
 
@@ -104,7 +103,6 @@ var workouts = [];
 if (localStorage.getItem('workouts')) {
   workouts = JSON.parse(localStorage.getItem('workouts'));
   workouts.forEach(function (workout) {
-    // renderWorkoutOnMap(workout);
     renderWorkoutOnlist(workout);
   });
 }
@@ -144,20 +142,7 @@ function handleFormSubmit(event) {
   // Mark new workout on map
   // renderWorkoutOnMap(newWorkout);
 
-  // Add workout on the workout list
-  renderWorkoutOnList(newWorkout);
 }
-
-///ClearForm//
-
-// Wait for content to load first//
-// document.addEventListener('DOMContentLoaded', function () {
-
-//   // Get the form and reset button elements
-//   var form = document.querySelector('.form-bg');
-//   var resetButton = document//save reference to import DOM elements
-// let currentDayEl = $('#currentDay');
-// })
 
 
 // Get the reset button element
