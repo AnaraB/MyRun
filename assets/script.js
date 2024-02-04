@@ -68,16 +68,6 @@ setInterval(displayCurrentTime, 1000);
 // ----------------------WorkOut-----------------------------------// 
 function renderWorkoutOnMap(workouts) {
 
-}
-
-// Example workout object
-const sampleWorkout = {
-  type: 'Running',
-  distance: 5.2,
-  duration: 32,
-  timestamp: 'April 14',
-  latitude: 37.7749, // Replace with the actual latitude
-  longitude: -122.4194, // Replace with the actual longitude
 };
 
 // Call the render functions with the sample workout
@@ -105,8 +95,6 @@ function renderWorkoutOnlist(workouts) {
   workoutdetailsdiv.append(div)
 
 }
-
-
 
 
 //Workout Array objects//
