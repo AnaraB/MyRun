@@ -1,12 +1,13 @@
 //save reference to import DOM elements
 let currentDayEl = $('#currentDay');
+let workoutdetailsdiv = document.getElementById("workoutdetails")
 
 // global variables
 let latitude;
 let longitude;
 
 //get position
-if (navigator.geolocation)
+if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(
     function (position) {
       // console.log(position);
@@ -50,7 +51,7 @@ if (navigator.geolocation)
       alert('Could not get your position');
     }
   )
-
+}
 
 
 //handle displaying the time
@@ -65,6 +66,48 @@ setInterval(displayCurrentTime, 1000);
 
 
 // ----------------------WorkOut-----------------------------------// 
+function renderWorkoutOnMap(workouts) {
+
+}
+
+// Example workout object
+const sampleWorkout = {
+  type: 'Running',
+  distance: 5.2,
+  duration: 32,
+  timestamp: 'April 14',
+  latitude: 37.7749, // Replace with the actual latitude
+  longitude: -122.4194, // Replace with the actual longitude
+};
+
+// Call the render functions with the sample workout
+renderWorkoutOnMap(sampleWorkout);
+renderWorkoutOnList(sampleWorkout);
+
+
+function renderWorkoutOnlist(workouts) {
+
+  let div = document.createElement("div")
+  let workout_type_para
+    = document.createElement("p")
+  workout_type_para.innerHTML = "Activity type: " + workouts.type
+
+  let workout_distance_para
+    = document.createElement("p")
+  workout_distance_para.innerHTML = "Distance " + workouts.distance
+  div.append(workout_type_para, workout_distance_para)
+
+  let workout_Duration_para
+    = document.createElement("p")
+  workout_Duration_para.innerHTML = "Time " + workouts.duration
+  div.append(workout_type_para, workout_distance_para, workout_Duration_para)
+
+  workoutdetailsdiv.append(div)
+
+}
+
+
+
 
 //Workout Array objects//
 var workouts = [];
@@ -73,15 +116,15 @@ var workouts = [];
 if (localStorage.getItem('workouts')) {
   workouts = JSON.parse(localStorage.getItem('workouts'));
   workouts.forEach(function (workout) {
-    renderWorkoutOnMap(workout);
-    renderWorkoutOnList(workout);
+    // renderWorkoutOnMap(workout);
+    renderWorkoutOnlist(workout);
   });
 }
 
 //----------------------Form submission ------------------------//
 //event listener for submission//
 var form = document.querySelector('.form-bg');
-  form.addEventListener('submit', handleFormSubmit);
+form.addEventListener('submit', handleFormSubmit);
 
 function handleFormSubmit(event) {
   event.preventDefault();
@@ -95,47 +138,49 @@ function handleFormSubmit(event) {
   if (isNaN(parseFloat(distance)) || isNaN(parseFloat(duration))) {
     return;
   }
-  
-// Generate new workout obj//
-var newWorkout = {
-  type: type,
-  distance: parseFloat(distance),
-  duration: parseFloat(duration),
-  timestamp: dayjs().format('MMMM D'),
-};
 
-// Add new workout obj workouts array
-workouts.push(newWorkout);
+  // Generate new workout obj//
+  var newWorkout = {
+    type: type,
+    distance: parseFloat(distance),
+    duration: parseFloat(duration),
+    timestamp: dayjs().format('MMMM D'),
+  };
 
-// Save to local storage
-localStorage.setItem('workouts', JSON.stringify(workouts));
+  // Add new workout obj workouts array
+  workouts.push(newWorkout);
 
-// Mark new workout on map
-renderWorkoutOnMap(newWorkout);
+  // Save to local storage
+  localStorage.setItem('workouts', JSON.stringify(workouts));
 
-// Add workout on the workout list
-renderWorkoutOnList(newWorkout);
+  // Mark new workout on map
+  // renderWorkoutOnMap(newWorkout);
+
+  // Add workout on the workout list
+  renderWorkoutOnList(newWorkout);
 }
 
-  ///ClearForm//
+///ClearForm//
 
-  // Wait for content to load first//
-  document.addEventListener('DOMContentLoaded', function () {
+// Wait for content to load first//
+// document.addEventListener('DOMContentLoaded', function () {
 
-    // Get the form and reset button elements
-    var form = document.querySelector('.form-bg');
-    var resetButton = document.querySelector('.reset-btn');
-
-    // Event listener for reset button
-    resetButton.addEventListener('click', function (event) {
-
-      // Prioritise resetting form by preventing defualt function
-      event.preventDefault();
-
-      // Reset the form fields
-      form.reset();
-    });
-  })
+//   // Get the form and reset button elements
+//   var form = document.querySelector('.form-bg');
+//   var resetButton = document//save reference to import DOM elements
+// let currentDayEl = $('#currentDay');
+// })
 
 
+// Get the reset button element
+var resetButton = document.querySelector('.reset-btn');
 
+// Event listener for reset button
+resetButton.addEventListener('click', function (event) {
+
+  // Prioritize resetting form by preventing default function
+  event.preventDefault();
+
+  // Reset the form fields
+  form.reset();
+});
