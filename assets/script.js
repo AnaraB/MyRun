@@ -92,9 +92,6 @@ function displayCurrentTime() {
 setInterval(displayCurrentTime, 1000);
 
 // ----------------------WorkOut-----------------------------------// 
-function renderWorkoutOnMap(workouts) {
-  // Your rendering logic here
-}
 
 // Call the render functions with the sample workout
 let workoutsElement = document.querySelector('.workouts');
@@ -148,7 +145,7 @@ function handleFormSubmit(event) {
 
   // Generate new workout obj
   var newWorkout = {
-    type: "",
+    type: type,
     distance: parseFloat(distance),
     duration: parseFloat(duration),
     timestamp: dayjs().format('MMMM D'),
@@ -240,8 +237,8 @@ function displayWeatherModal(weatherData) {
 }
 
 // Initial coordinates (you can set these to your default location)
-const initialLat = 0; // Replace with your initial latitude
-const initialLng = 0; // Replace with your initial longitude
+const initialLat = 0; // Initial latitude
+const initialLng = 0; // Initial longitude
 
 // Fetch weather data and display in modal when the page loads
 fetchWeatherData(initialLat, initialLng);
