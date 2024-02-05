@@ -15,7 +15,6 @@ function loadPrevsMrk() {
   
   console.log(prevsWorkOuts)
 
-
   //on each for loop iteration add marker to the map based on lat/lng depending on form data
 
 
@@ -180,14 +179,10 @@ var resetButton = document.querySelector('.reset-btn');
 //   form.reset();
 // });
 
-//------WeatherApp------//
+//------WeatherApp------1//
 // Your API key from OpenWeatherMap
-const apiKey = "ab16215a13fcb8cbd052044053143685"
+const apiKey = "ab16215a13fcb8cbd052044053143685";
 let modal;
-
-// map variable 
-// let map;
-
 
 function fetchWeatherData(lat, lon) {
   const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
@@ -202,7 +197,7 @@ function fetchWeatherData(lat, lon) {
 }
 
 function displayWeatherModal(weatherData) {
-  // call weather information from the response
+  // Call weather information from the response
   const temperature = weatherData.list[0].main.temp;
   const description = weatherData.list[0].weather[0].description;
 
@@ -211,46 +206,30 @@ function displayWeatherModal(weatherData) {
   modal.classList.add("modal");
   
   // Populate modal content with weather information
-modal.innerHTML = `
-  <div class="modal-content">
-    <span class="close-btn">&times;</span>
-    <p>Temperature: ${temperature} K</p>
-    <p>Description: ${description}</p>
-  </div>
-`;
+  modal.innerHTML = `
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <p>Temperature: ${temperature} K</p>
+      <p>Description: ${description}</p>
+    </div>
+  `;
 
   // Append modal to the body
   document.body.appendChild(modal);
 
-// Display modal
-modal.style.display = 'block';
+  // Display modal
+  modal.style.display = 'block';
 
-// Add event listener to close the modal
-const closeBtn = modal.querySelector('.close-btn');
-closeBtn.addEventListener('click', () => {
-  modal.style.display = 'none';
-});
+  // Add event listener to close the modal
+  const closeBtn = modal.querySelector('.close-btn');
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
 }
 
-// Fetch weather data and display in modal
-map.on('click', function (mapEvent) {
-  const lat = mapEvent.latlng.lat;
-  const lng = mapEvent.latlng.lng;
-  const workoutsCoords = [lat, lng];
+// Initial coordinates (you can set these to your default location)
+const initialLat = 0; // Replace with your initial latitude
+const initialLng = 0; // Replace with your initial longitude
 
-  // Display workout marker on the map
-  L.marker(workoutsCoords)
-    .addTo(map)
-    .bindPopup(
-      L.popup({
-        maxWidth: 250,
-        minWidth: 100,
-        closeOnClick: false,
-      })
-    )
-    .setPopupContent('Workout')
-    .openPopup();
-
-  // Fetch weather data and display in modal
-  fetchWeatherData(lat, lng);
-});
+// Fetch weather data and display in modal when the page loads
+fetchWeatherData(initialLat, initialLng);
