@@ -15,11 +15,6 @@ function loadPrevsMrk() {
   
   console.log(prevsWorkOuts)
 
- // Iterate through each workout in localStorage
- prevsWorkouts.forEach(function (workout) {
-  // Extract latitude and longitude from workout data
-  const lat = workout.lat;
-  const lng = workout.lng;
 
   //on each for loop iteration add marker to the map based on lat/lng depending on form data
 
