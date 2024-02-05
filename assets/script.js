@@ -1,8 +1,8 @@
-// Save reference to import DOM elements
+//save reference to import DOM elements
 let currentDayEl = $('#currentDay');
 let workoutdetailsdiv = document.getElementById("workoutdetails")
 
-// Global variables
+// global variables
 let lat;
 let lng;
 let map;
@@ -30,7 +30,7 @@ function loadPrevsMrk() {
             closeOnClick: false,
           })
         )
-        .setPopupContent('Workout')
+        .setPopupContent(`Workout: ${workout.type}<br>Distance: ${workout.distance} km<br>Duration: ${workout.duration} mins`)
         .openPopup();
 
       // Render the workout on the list
@@ -43,8 +43,10 @@ function loadPrevsMrk() {
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(
     function (position) {
+      // console.log(position);
       latitude = position.coords.latitude;
       longitude = position.coords.longitude;
+
       const coords = [latitude, longitude];
 
       // Store result of set map in the map variable
@@ -54,10 +56,12 @@ if (navigator.geolocation) {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(map);
 
-      // Add eventListener created by Leaflet library, it listens to click event on the map
+      // Add eventListener created by leflet library, it listens to click event on the map
       map.on('click', function (mapEvent) {
+        // Get coordinates of the point where it was clicked
         lat = mapEvent.latlng.lat;
         lng = mapEvent.latlng.lng;
+        // Create array to store latitude and longitude
         const workoutsCoords = [lat, lng];
         L.marker(workoutsCoords)
           .addTo(map)
@@ -70,12 +74,12 @@ if (navigator.geolocation) {
           )
           .setPopupContent('Workout')
           .openPopup();
-      });
+      })
     },
     function () {
       alert('Could not get your position');
     }
-  );
+  )
 }
 
 // Handle displaying the time
@@ -98,19 +102,19 @@ let div = document.createElement("div");
 div.classList.add("workout-item");
 
 function renderWorkoutOnlist(workouts) {
-  let div = document.createElement("div")
-  let workout_type_para = document.createElement("p")
-  workout_type_para.innerHTML = "Activity type: " + workouts.type
+  let div = document.createElement("div");
+  let workout_type_para = document.createElement("p");
+  workout_type_para.innerHTML = "Activity type: " + workouts.type;
 
-  let workout_distance_para = document.createElement("p")
-  workout_distance_para.innerHTML = "Distance " + workouts.distance
-  div.append(workout_type_para, workout_distance_para)
+  let workout_distance_para = document.createElement("p");
+  workout_distance_para.innerHTML = "Distance " + workouts.distance;
+  div.append(workout_type_para, workout_distance_para);
 
-  let workout_Duration_para = document.createElement("p")
-  workout_Duration_para.innerHTML = "Time " + workouts.duration
-  div.append(workout_type_para, workout_distance_para, workout_Duration_para)
+  let workout_Duration_para = document.createElement("p");
+  workout_Duration_para.innerHTML = "Time " + workouts.duration;
+  div.append(workout_type_para, workout_distance_para, workout_Duration_para);
 
-  workoutdetailsdiv.append(div)
+  workoutdetailsdiv.append(div);
 }
 
 // Workout Array objects
@@ -124,7 +128,7 @@ if (localStorage.getItem('workouts')) {
   });
 }
 
-//----------------------Form submission ------------------------//
+// ----------------------Form submission ------------------------//
 // Event listener for submission
 var form = document.querySelector('.form-bg');
 form.addEventListener('submit', handleFormSubmit);
@@ -157,6 +161,23 @@ function handleFormSubmit(event) {
 
   // Save to local storage
   localStorage.setItem('workouts', JSON.stringify(workouts));
+
+  // Add marker to the map based on lat/lng
+  const workoutsCoords = [newWorkout.lat, newWorkout.lng];
+  L.marker(workoutsCoords)
+    .addTo(map)
+    .bindPopup(
+      L.popup({
+        maxWidth: 250,
+        minWidth: 100,
+        closeOnClick: false,
+      })
+    )
+    .setPopupContent(`Workout: ${newWorkout.type}<br>Distance: ${newWorkout.distance} km<br>Duration: ${newWorkout.duration} mins`)
+    .openPopup();
+
+  // Render the workout on the list
+  renderWorkoutOnlist(newWorkout);
 }
 
 // Get the reset button element
@@ -170,12 +191,11 @@ var resetButton = document.querySelector('.reset-btn');
 //   form.reset();
 // });
 
-//------WeatherApp------1//
+// ------WeatherApp------
 // Your API key from OpenWeatherMap
 const apiKey = "ab16215a13fcb8cbd052044053143685";
 let modal;
 
-// Fetch weather data and display in modal
 function fetchWeatherData(lat, lon) {
   const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
@@ -188,7 +208,6 @@ function fetchWeatherData(lat, lon) {
     .catch(error => console.error('Error fetching weather data:', error));
 }
 
-// Display weather modal
 function displayWeatherModal(weatherData) {
   // Call weather information from the response
   const temperature = weatherData.list[0].main.temp;
