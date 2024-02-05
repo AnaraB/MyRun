@@ -73,7 +73,7 @@ function renderWorkoutOnMap(workouts) {
 // Call the render functions with the sample workout
 let workoutsElement = document.querySelector('.workouts');
 let div = document.createElement("div");
-  div.classList.add("workout-item");
+div.classList.add("workout-item");
 
 function renderWorkoutOnlist(workouts) {
 
@@ -159,7 +159,8 @@ resetButton.addEventListener('click', function (event) {
 
 //------WeatherApp------//
 // Your API key from OpenWeatherMap
-//const apiKey = 3b8c99a3b41dbd2e5ad7ed206d1c29cc;//
+const apiKey = ab16215a13fcb8cbd052044053143685
+let modal;
 
 function fetchWeatherData(lat, lon) {
   const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
@@ -174,12 +175,12 @@ function fetchWeatherData(lat, lon) {
 }
 
 function displayWeatherModal(weatherData) {
-  // call  weather information from the response
+  // call weather information from the response
   const temperature = weatherData.list[0].main.temp;
   const description = weatherData.list[0].weather[0].description;
 
   // Create a modal element
-  const modal = document.createElement("div");
+  modal = document.createElement("div");
   modal.classList.add("modal");
   
   // Populate modal content with weather information
@@ -194,17 +195,17 @@ function displayWeatherModal(weatherData) {
   // Append modal to the body
   document.body.appendChild(modal);
 
-  // Display modal
-  modal.style.display = 'block';
+// Display modal
+modal.style.display = 'block';
 
-  // Add event listener to close the modal
-  const closeBtn = modal.querySelector('.close-btn');
-  closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
+// Add event listener to close the modal
+const closeBtn = modal.querySelector('.close-btn');
+closeBtn.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
 }
 
-// Modify your existing click event listener to call fetchWeatherData
+// Fetch weather data and display in modal
 map.on('click', function (mapEvent) {
   const lat = mapEvent.latlng.lat;
   const lng = mapEvent.latlng.lng;
