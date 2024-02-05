@@ -68,11 +68,11 @@
 
     </ul>
     
-
+<!-- Button trigger modal -->
     <div>
       <button type="button" class="btn btn-danger">Reset</button>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Motivations</button>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="">Current Weather</button>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inspirationalModel">Motivations</button>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#weatherModel">Current Weather</button>
     </div>
         </div>
       <!-- map here -->
@@ -81,8 +81,8 @@
         </div>
     </div> 
 
-<!-- Modal -->
-<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal for Motivational quote-->
+<div class="modal" id="inspirationalModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -104,6 +104,40 @@
   </div>
 </div>
 
+
+
+<!-- Modal for weather popup-->
+<div class="modal" id="weatherModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Weather</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <h1>Current Weather</h1>
+          <form>
+            <input type="text" id="city-input" placeholder="Enter City" />
+            <input type="submit" value="Get Weather" id="getWeatherBtn"/>
+          </form>
+          <div id="weather-data">
+            <div class="icon">
+              <!-- <img src="http://openweathermap.org/img/wn/01d.png" alt="Weather Icon"> -->
+            </div>
+            <div class="temperature"></div>
+            <div class="description"></div>
+            <div class="details">
+              <!-- <div>Feels like: 23°C</div>
+                    <div>Humidity: 40%</div>
+                    <div>Wind speed: 5 m/s</div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
   <!-- jQuery -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

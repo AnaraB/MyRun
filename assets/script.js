@@ -98,3 +98,58 @@ async function getQuote() {
 
 containerEl.css("display", "none"); // Hide the container element initially
 btnEl.on("click", getQuote); // Add event listener to the button for fetching a quote
+
+
+// weather modal
+
+const apikey = "379f54c3553fa3935a559271241c0049";
+
+const weatherDataEl = $("#weather-data"); // Select the element with ID "weather-data"
+
+const cityInputEl = $("#city-input"); // Select the element with ID "city-input"
+
+const formEl = $("form"); // Select the form element
+
+formEl.on("submit", (event) => {
+  event.preventDefault(); // Prevent the default form submission behavior
+  const cityValue = cityInputEl.val(); // Get the value of the input element
+  getWeatherData(cityValue); // Call the getWeatherData function with the city value
+});
+
+async function getWeatherData(cityValue) {
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${cityValue}&appid=${apikey}&units=metric`
+    ); // Make a request to the OpenWeatherMap API
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok"); // Throw an error if the response is not successful
+    }
+
+    const data = await response.json(); // Parse the response data
+
+    const temperature = Math.round(data.main.temp); // Get the temperature value and round it
+
+    const description = data.weather[0].description; // Get the weather description
+
+    const icon = data.weather[0].icon; // Get the weather icon code
+
+    const details = [
+      `Feels like: ${Math.round(data.main.feels_like)}`,
+      `Humidity: ${data.main.humidity}%`,
+      `Wind speed: ${data.wind.speed} m/s`,
+    ]; // Create an array of weather details
+
+    weatherDataEl.find(".icon").html(`<img src="http://openweathermap.org/img/wn/${icon}.png" alt="Weather Icon">`); // Set the HTML content of the element with class "icon" to display the weather icon
+    weatherDataEl.find(".temperature").text(`${temperature}°C`); // Set the text content of the element with class "temperature" to display the temperature
+    weatherDataEl.find(".description").text(description); // Set the text content of the element with class "description" to display the weather description
+
+    weatherDataEl.find(".details").html(details.map((detail) => `<div>${detail}</div>`).join("")); // Set the HTML content of the element with class "details" to display the weather details
+  } catch (error) {
+    weatherDataEl.find(".icon").html(""); // Clear the HTML content of the element with class "icon"
+    weatherDataEl.find(".temperature").text(""); // Clear the text content of the element with class "temperature"
+    weatherDataEl.find(".description").text("An error happened, please try again later"); // Set the text content of the element with class "description" to display an error message
+
+    weatherDataEl.find(".details").html(""); // Clear the HTML content of the element with class "details"
+  }
+}

@@ -118,3 +118,38 @@ body {
     width: 100%;
   }
 }
+
+/* Weather model style */
+.details{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.details > div{
+  padding: 20px;
+  background-color: #f1f1f1;
+  margin: 10px;
+  flex: 1;
+  border-radius: 5px;
+  text-align: center;
+  min-height: 45px;
+}
+#city-input {
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Style for submit button */
+#getWeatherBtn {
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
