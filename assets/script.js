@@ -30,7 +30,7 @@ function loadPrevsMrk() {
             closeOnClick: false,
           })
         )
-        .setPopupContent(`Workout: ${workout.type}<br>Distance: ${workout.distance} km<br>Duration: ${workout.duration} mins`)
+        .setPopupContent(`Distance: ${workout.distance} km<br>Duration: ${workout.duration} mins`)
         .openPopup();
 
       // Render the workout on the list
@@ -148,7 +148,7 @@ function handleFormSubmit(event) {
 
   // Generate new workout obj
   var newWorkout = {
-    type: type,
+    type: "",
     distance: parseFloat(distance),
     duration: parseFloat(duration),
     timestamp: dayjs().format('MMMM D'),
@@ -173,7 +173,7 @@ function handleFormSubmit(event) {
         closeOnClick: false,
       })
     )
-    .setPopupContent(`Workout: ${newWorkout.type}<br>Distance: ${newWorkout.distance} km<br>Duration: ${newWorkout.duration} mins`)
+    .setPopupContent(`Distance: ${newWorkout.distance} km<br>Duration: ${newWorkout.duration} mins`)
     .openPopup();
 
   // Render the workout on the list
