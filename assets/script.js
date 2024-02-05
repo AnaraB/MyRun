@@ -3,8 +3,35 @@ let currentDayEl = $('#currentDay');
 let workoutdetailsdiv = document.getElementById("workoutdetails")
 
 // global variables
-let latitude;
-let longitude;
+let lat;
+let lng;
+let map;
+
+// Page Load markers from prevs workout//
+function loadPrevsMrk() {
+
+  //loop through local storage for prevs marker cords
+  let prevsWorkOuts = localStorage.getItem("workouts")
+  
+  console.log(prevsWorkOuts)
+
+ // Iterate through each workout in localStorage
+ prevsWorkouts.forEach(function (workout) {
+  // Extract latitude and longitude from workout data
+  const lat = workout.lat;
+  const lng = workout.lng;
+
+  //on each for loop iteration add marker to the map based on lat/lng depending on form data
+
+
+  //grab add marker to map code
+
+
+
+}
+
+loadPrevsMrk()
+
 
 //get position
 if (navigator.geolocation) {
@@ -17,7 +44,7 @@ if (navigator.geolocation) {
       const coords = [latitude, longitude];
 
       //store result of set map in the map variable
-      const map = L.map('map').setView(coords, 16);
+      map = L.map('map').setView(coords, 16);
 
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -28,8 +55,8 @@ if (navigator.geolocation) {
       //add eventListener created by leflet library, it listens to click event on the map
       map.on('click', function (mapEvent) {
         //get coordinates of the point where it was clicked
-        const lat = mapEvent.latlng.lat;
-        const lng = mapEvent.latlng.lng;
+        lat = mapEvent.latlng.lat;
+        lng = mapEvent.latlng.lng;
         //create array to store lattitude and longitude
         const workoutsCoords = [lat, lng];
         L.marker(workoutsCoords)
@@ -120,6 +147,7 @@ function handleFormSubmit(event) {
   var distance = document.getElementById('autoSizingInput').value;
   var duration = document.getElementById('autoSizingInputGroup').value;
 
+
   // Validate data (Ensure data is interger and valid)
   if (isNaN(parseFloat(distance)) || isNaN(parseFloat(duration))) {
     return;
@@ -131,6 +159,8 @@ function handleFormSubmit(event) {
     distance: parseFloat(distance),
     duration: parseFloat(duration),
     timestamp: dayjs().format('MMMM D'),
+    lat: parseFloat(lat),
+    lng: parseFloat(lng),
   };
 
   // Add new workout obj workouts array
@@ -147,20 +177,24 @@ function handleFormSubmit(event) {
 // Get the reset button element
 var resetButton = document.querySelector('.reset-btn');
 
-// Event listener for reset button
-resetButton.addEventListener('click', function (event) {
+// // Event listener for reset button
+// resetButton.addEventListener('click', function (event) {//
 
-  // Prioritize resetting form by preventing default function
-  event.preventDefault();
+//   // Prioritize resetting form by preventing default function
+//   event.preventDefault();
 
-  // Reset the form fields
-  form.reset();
-});
+//   // Reset the form fields
+//   form.reset();
+// });
 
 //------WeatherApp------//
 // Your API key from OpenWeatherMap
-const apiKey = ab16215a13fcb8cbd052044053143685
+const apiKey = "ab16215a13fcb8cbd052044053143685"
 let modal;
+
+// map variable 
+// let map;
+
 
 function fetchWeatherData(lat, lon) {
   const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
