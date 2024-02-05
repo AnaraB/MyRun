@@ -1,57 +1,63 @@
-//save reference to import DOM elements
+// Save reference to import DOM elements
 let currentDayEl = $('#currentDay');
 let workoutdetailsdiv = document.getElementById("workoutdetails")
 
-// global variables
+// Global variables
 let lat;
 let lng;
 let map;
 
-// Page Load markers from prevs workout//
+// Page Load markers from prevs workout
 function loadPrevsMrk() {
-
-  //loop through local storage for prevs marker cords
+  // Loop through local storage for prevs marker cords
   let prevsWorkOuts = localStorage.getItem("workouts")
-  
   console.log(prevsWorkOuts)
 
-  //on each for loop iteration add marker to the map based on lat/lng depending on form data
+  // Parse the JSON string to an array
+  let workouts = JSON.parse(prevsWorkOuts);
 
+  // Check if there are stored workouts
+  if (workouts) {
+    workouts.forEach(function (workout) {
+      // Add marker to the map based on lat/lng
+      const workoutsCoords = [workout.lat, workout.lng];
+      L.marker(workoutsCoords)
+        .addTo(map)
+        .bindPopup(
+          L.popup({
+            maxWidth: 250,
+            minWidth: 100,
+            closeOnClick: false,
+          })
+        )
+        .setPopupContent('Workout')
+        .openPopup();
 
-  //grab add marker to map code
-
-
-
+      // Render the workout on the list
+      renderWorkoutOnlist(workout);
+    });
+  }
 }
 
-loadPrevsMrk()
-
-
-//get position
+// Get position
 if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(
     function (position) {
-      // console.log(position);
       latitude = position.coords.latitude;
       longitude = position.coords.longitude;
-
       const coords = [latitude, longitude];
 
-      //store result of set map in the map variable
+      // Store result of set map in the map variable
       map = L.map('map').setView(coords, 16);
 
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(map);
 
-
-
-      //add eventListener created by leflet library, it listens to click event on the map
+      // Add eventListener created by Leaflet library, it listens to click event on the map
       map.on('click', function (mapEvent) {
-        //get coordinates of the point where it was clicked
         lat = mapEvent.latlng.lat;
         lng = mapEvent.latlng.lng;
-        //create array to store lattitude and longitude
         const workoutsCoords = [lat, lng];
         L.marker(workoutsCoords)
           .addTo(map)
@@ -64,32 +70,27 @@ if (navigator.geolocation) {
           )
           .setPopupContent('Workout')
           .openPopup();
-
-      })
-
+      });
     },
     function () {
       alert('Could not get your position');
     }
-  )
+  );
 }
 
-
-//handle displaying the time
+// Handle displaying the time
 function displayCurrentTime() {
   let rightNow = dayjs().format('dddd, MMMM D');
   currentDayEl.text(rightNow);
 }
 
-
-// display currentTime
+// Display currentTime
 setInterval(displayCurrentTime, 1000);
-
 
 // ----------------------WorkOut-----------------------------------// 
 function renderWorkoutOnMap(workouts) {
-
-};
+  // Your rendering logic here
+}
 
 // Call the render functions with the sample workout
 let workoutsElement = document.querySelector('.workouts');
@@ -97,30 +98,25 @@ let div = document.createElement("div");
 div.classList.add("workout-item");
 
 function renderWorkoutOnlist(workouts) {
-
   let div = document.createElement("div")
-  let workout_type_para
-    = document.createElement("p")
+  let workout_type_para = document.createElement("p")
   workout_type_para.innerHTML = "Activity type: " + workouts.type
 
-  let workout_distance_para
-    = document.createElement("p")
+  let workout_distance_para = document.createElement("p")
   workout_distance_para.innerHTML = "Distance " + workouts.distance
   div.append(workout_type_para, workout_distance_para)
 
-  let workout_Duration_para
-    = document.createElement("p")
+  let workout_Duration_para = document.createElement("p")
   workout_Duration_para.innerHTML = "Time " + workouts.duration
   div.append(workout_type_para, workout_distance_para, workout_Duration_para)
 
   workoutdetailsdiv.append(div)
-
 }
 
-//Workout Array objects//
+// Workout Array objects
 var workouts = [];
 
-// Load workouts from local storage//
+// Load workouts from local storage
 if (localStorage.getItem('workouts')) {
   workouts = JSON.parse(localStorage.getItem('workouts'));
   workouts.forEach(function (workout) {
@@ -129,7 +125,7 @@ if (localStorage.getItem('workouts')) {
 }
 
 //----------------------Form submission ------------------------//
-//event listener for submission//
+// Event listener for submission
 var form = document.querySelector('.form-bg');
 form.addEventListener('submit', handleFormSubmit);
 
@@ -141,13 +137,12 @@ function handleFormSubmit(event) {
   var distance = document.getElementById('autoSizingInput').value;
   var duration = document.getElementById('autoSizingInputGroup').value;
 
-
-  // Validate data (Ensure data is interger and valid)
+  // Validate data (Ensure data is integer and valid)
   if (isNaN(parseFloat(distance)) || isNaN(parseFloat(duration))) {
     return;
   }
 
-  // Generate new workout obj//
+  // Generate new workout obj
   var newWorkout = {
     type: type,
     distance: parseFloat(distance),
@@ -157,24 +152,20 @@ function handleFormSubmit(event) {
     lng: parseFloat(lng),
   };
 
-  // Add new workout obj workouts array
+  // Add new workout obj to workouts array
   workouts.push(newWorkout);
 
   // Save to local storage
   localStorage.setItem('workouts', JSON.stringify(workouts));
-
-
 }
 
 // Get the reset button element
 var resetButton = document.querySelector('.reset-btn');
 
-// // Event listener for reset button
-// resetButton.addEventListener('click', function (event) {//
-
+// Event listener for reset button
+// resetButton.addEventListener('click', function (event) {
 //   // Prioritize resetting form by preventing default function
 //   event.preventDefault();
-
 //   // Reset the form fields
 //   form.reset();
 // });
@@ -184,6 +175,7 @@ var resetButton = document.querySelector('.reset-btn');
 const apiKey = "ab16215a13fcb8cbd052044053143685";
 let modal;
 
+// Fetch weather data and display in modal
 function fetchWeatherData(lat, lon) {
   const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
@@ -196,6 +188,7 @@ function fetchWeatherData(lat, lon) {
     .catch(error => console.error('Error fetching weather data:', error));
 }
 
+// Display weather modal
 function displayWeatherModal(weatherData) {
   // Call weather information from the response
   const temperature = weatherData.list[0].main.temp;
@@ -204,7 +197,7 @@ function displayWeatherModal(weatherData) {
   // Create a modal element
   modal = document.createElement("div");
   modal.classList.add("modal");
-  
+
   // Populate modal content with weather information
   modal.innerHTML = `
     <div class="modal-content">
@@ -233,3 +226,6 @@ const initialLng = 0; // Replace with your initial longitude
 
 // Fetch weather data and display in modal when the page loads
 fetchWeatherData(initialLat, initialLng);
+
+// Load previous markers
+loadPrevsMrk();
