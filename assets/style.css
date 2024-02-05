@@ -10,7 +10,8 @@ html {
 }
 
 body {
-  font-family: 'Manrope', sans-serif;
+  font-family: "Courier New", Courier, monospace;
+  min-height: 100vh;
   background-color: #fff;
   padding: 2.5rem;
 }
@@ -50,3 +51,68 @@ body {
   padding: 1rem ;
 }
 
+
+/* Inspirational quote styles */
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+.modal-content {
+  background: linear-gradient(to left bottom, lightgreen, lightblue);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+  font-family: "Courier New", Courier, monospace;
+  padding: 30px;
+  border-radius: 15px;
+  width: 100%;
+  margin: 10px;
+  text-align: center;
+}
+
+.heading {
+  font-size: 35px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.quote {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.author {
+  font-size: 25px;
+  margin: 10px;
+  font-style: italic;
+}
+
+.btn-small, .btn {
+  font-size: 25px; /* Adjust the font size as needed */
+  padding: 5px 10px; /* Adjust the padding as needed */
+  width: auto; /* Allow the width to adjust based on content */
+  margin-top: 10px; /* Adjust the margin as needed */
+}
+
+
+/* Media Query */
+@media (max-width: 768px) {
+  .sidebar {
+    padding: 2rem;
+  }
+
+  .logo {
+    height: 4rem;
+  }
+
+  .logo p {
+    font-size: 1.2rem;
+  }
+
+  .workouts {
+    height: auto;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
