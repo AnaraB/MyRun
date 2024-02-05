@@ -164,8 +164,6 @@ function handleFormSubmit(event) {
   // Save to local storage
   localStorage.setItem('workouts', JSON.stringify(workouts));
 
-  // Mark new workout on map
-  // renderWorkoutOnMap(newWorkout);
 
 }
 
@@ -213,13 +211,13 @@ function displayWeatherModal(weatherData) {
   modal.classList.add("modal");
   
   // Populate modal content with weather information
-  modal.innerHTML = `
-    <div class="modal-content">
-      <span class="close-btn">&times;</span>
-      <p>Temperature: ${temperature} K</p>
-      <p>Description: ${description}</p>
-    </div>
-  `;
+modal.innerHTML = `
+  <div class="modal-content">
+    <span class="close-btn">&times;</span>
+    <p>Temperature: ${temperature} K</p>
+    <p>Description: ${description}</p>
+  </div>
+`;
 
   // Append modal to the body
   document.body.appendChild(modal);
