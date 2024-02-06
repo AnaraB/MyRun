@@ -1,6 +1,14 @@
+
+// Save reference to import DOM elements
+let currentDayEl = document.getElementById('currentDay');
+
 //save reference to import DOM elements
-let currentDayEl = $('#currentDay');
+var currentDayEl = $('#currentDay');
 let workoutdetailsdiv = document.getElementById("workoutdetails")
+var running = $('.select-type');
+var distance = $('.input-distance');
+var duration = $('.input-duration');
+
 
 // global variables
 let lat;
@@ -74,6 +82,16 @@ if (navigator.geolocation) {
           )
           .setPopupContent('Workout')
           .openPopup();
+      });
+    }
+  );
+}
+
+// Function to load the map (assuming this was intended to be a separate function)
+function loadMap() {
+  // Add any code related to loading the map if needed
+}
+
       })
     },
     function () {
@@ -88,8 +106,19 @@ function displayCurrentTime() {
   currentDayEl.text(rightNow);
 }
 
+// display currentTime
+setInterval(displayCurrentTime, 1000);
+
+
+
+// get randow quote
+const btnEl = $("#btn"); // Get button element
+const quoteEl = $("#quote"); // Get quote element
+const authorEl = $("#author"); // Get author element
+const containerEl = $(".Mycontainer"); // Get container element
 // Display currentTime
 setInterval(displayCurrentTime, 1000);
+
 
 // ----------------------WorkOut-----------------------------------// 
 
@@ -134,9 +163,9 @@ function handleFormSubmit(event) {
   event.preventDefault();
 
   // Get form data
-  var type = document.getElementById('autoSizingSelect').value;
-  var distance = document.getElementById('autoSizingInput').value;
-  var duration = document.getElementById('autoSizingInputGroup').value;
+  running.val();
+  distance.val();
+  duration.val();
 
   // Validate data (Ensure data is integer and valid)
   if (isNaN(parseFloat(distance)) || isNaN(parseFloat(duration))) {
