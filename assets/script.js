@@ -1,12 +1,22 @@
+
 // Save reference to import DOM elements
 let currentDayEl = document.getElementById('currentDay');
+
+//save reference to import DOM elements
+var currentDayEl = $('#currentDay');
+var running = $('.select-type');
+var distance = $('.input-distance');
+var duration = $('.input-duration');
+
 
 // Global variables
 let latitude;
 let longitude;
 
-// Get position
-if (navigator.geolocation) {
+
+//get position
+if (navigator.geolocation)
+  
   navigator.geolocation.getCurrentPosition(
     function (position) {
       // console.log(position);
@@ -15,19 +25,23 @@ if (navigator.geolocation) {
 
       const coords = [latitude, longitude];
 
-      // Store result of set map in the map variable
+      //store result of set map in the map variable
+
       const map = L.map('map').setView(coords, 16);
 
       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(map);
 
-      // Add eventListener created by leaflet library, it listens to click event on the map
+
+
+      //add eventListener created by leflet library, it listens to click event on the map
       map.on('click', function (mapEvent) {
-        // Get coordinates of the point where it was clicked
+        //get coordinates of the point where it was clicked
         const lat = mapEvent.latlng.lat;
         const lng = mapEvent.latlng.lng;
-        // Create array to store latitude and longitude
+        //create array to store lattitude and longitude
+
         const workoutsCoords = [lat, lng];
         L.marker(workoutsCoords)
           .addTo(map)
@@ -40,6 +54,7 @@ if (navigator.geolocation) {
           )
           .setPopupContent('Workout')
           .openPopup();
+
       });
     }
   );
@@ -50,6 +65,13 @@ function loadMap() {
   // Add any code related to loading the map if needed
 }
 
+      })
+
+    },
+    function () {
+      alert('Could not get your position');
+    }
+  )
 
 
 
@@ -63,13 +85,94 @@ function displayCurrentTime() {
 setInterval(displayCurrentTime, 1000);
 
 
+
 // get randow quote
 const btnEl = $("#btn"); // Get button element
 const quoteEl = $("#quote"); // Get quote element
 const authorEl = $("#author"); // Get author element
 const containerEl = $(".Mycontainer"); // Get container element
 
+// display currentTime
+setInterval(displayCurrentTime, 1000);
+
+
+
+// ----------------------WorkOut-----------------------------------// 
+
+//Workout Array objects//
+var workouts = [];
+
+// Load workouts from local storage//
+if (localStorage.getItem('workouts')) {
+  workouts = JSON.parse(localStorage.getItem('workouts'));
+  workouts.forEach(function (workout) {
+    renderWorkoutOnMap(workout);
+    renderWorkoutOnList(workout);
+  });
+}
+
+//----------------------Form submission ------------------------//
+//event listener for submission//
+var form = document.querySelector('.form-bg');
+  form.addEventListener('submit', handleFormSubmit);
+
+function handleFormSubmit(event) {
+  event.preventDefault();
+
+  // Get form data
+  running.val();
+  distance.val();
+  duration.val();
+
+  // Validate data (Ensure data is interger and valid)
+  if (isNaN(parseFloat(distance)) || isNaN(parseFloat(duration))) {
+    return;
+  }
+  
+// Generate new workout obj//
+var newWorkout = {
+  type: running,
+  distance: parseFloat(distance),
+  duration: parseFloat(duration),
+  timestamp: dayjs().format('MMMM D'),
+};
+
+// Add new workout obj workouts array//
+workouts.push(newWorkout);
+
+// Save to local storage//
+localStorage.setItem('workouts', JSON.stringify(workouts));
+
+// Mark new workout on map//
+renderWorkoutOnMap(newWorkout);
+
+// Add workout on the workout list
+renderWorkoutOnList(newWorkout);
+}
+
+  ///ClearForm//
+
+  // Wait for content to load first//
+  document.addEventListener('DOMContentLoaded', function () {
+
+    // Get the form and reset button elements
+    var form = document.querySelector('.form-bg');
+    var resetButton = document.querySelector('.reset-btn');
+
+    // Event listener for reset button
+    resetButton.addEventListener('click', function (event) {
+
+      // Prioritise resetting form by preventing defualt function
+      event.preventDefault();
+
+      // Reset the form fields
+      form.reset();
+    });
+  })
+
+
 const apiURL = "https://api.quotable.io/random"; // API URL for fetching random quotes
+
 
 async function getQuote() {
   try {
