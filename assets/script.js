@@ -159,26 +159,21 @@ function handleFormSubmit(event) {
   // Save to local storage
   localStorage.setItem('workouts', JSON.stringify(workouts));
 
-  // Add marker to the map based on lat/lng
-  const workoutsCoords = [newWorkout.lat, newWorkout.lng];
-  L.marker(workoutsCoords)
-    .addTo(map)
-    .bindPopup(
-      L.popup({
-        maxWidth: 250,
-        minWidth: 100,
-        closeOnClick: false,
-      })
-    )
-    .setPopupContent(`Distance: ${newWorkout.distance} km<br>Duration: ${newWorkout.duration} mins`)
-    .openPopup();
+// Mark new workout on map
+renderWorkoutOnMap(newWorkout);
 
-  // Render the workout on the list
-  renderWorkoutOnlist(newWorkout);
+// Add workout on the workout list
+renderWorkoutOnList(newWorkout);
 }
 
-// Get the reset button element
-var resetButton = document.querySelector('.reset-btn');
+  ///ClearForm//
+
+  // Wait for content to load first//
+  document.addEventListener('DOMContentLoaded', function () {
+
+    // Get the form and reset button elements
+    var form = document.querySelector('.form-bg');
+    var resetButton = document.querySelector('.reset-btn');
 
 // Event listener for reset button
 // resetButton.addEventListener('click', function (event) {
