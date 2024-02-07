@@ -52,11 +52,6 @@ function loadMap(position) {
     renderWorkoutMarker(workoutCoords);
     distance.focus();
 
-
-    // workouts.forEach(work => {
-    //   renderWorkoutMarker(work);
-    // });
-
   })
 
 
@@ -89,9 +84,10 @@ function handleFormSubmit(event) {
   event.preventDefault();
 
   // Get form data
-  var type = document.getElementById('autoSizingSelect').value;
-  var distance = document.getElementById('autoSizingInput').value;
-  var duration = document.getElementById('autoSizingInputGroup').value;
+var type = $('#autoSizingSelect').val();
+var distance = $('#autoSizingInput').val();
+var duration = $('#autoSizingInputGroup').val();
+
 
   // Validate data (Ensure data is integer and valid)
 
@@ -140,7 +136,7 @@ myWorkoutForm.on('submit', handleFormSubmit);
 
 function renderWorkout(workout) {
   let html = `
-    <li class="workout workout-running" data-id="">
+    <li class="workout workout-running" data-id="" id="worktype">
       <h2 class="workout-title">${workout.type}</h2>
       <div class="workout-details">
         <span class="workout-icon">🏃‍♂️</span>
@@ -171,17 +167,51 @@ function getDataFromLocalStorage() {
 }
 
 
-
-
-// Reset list, confirmation form modal window. If "yes" button is clicked 
-var clearAllWorkouts = $('clearLocalStorageBtn');
-
-// Event listener when user clicks yes button to confirm to reset workouts
-clearAllWorkouts.on('click', function () {
-  //clear local storage 
-  // delete all workouts from map
-  //delete workout list 
+//----- clear storage----
+// Event listener for the "Yes" button in the modal to clear local storage
+$('.clearLocalStorageBtn').on('click', function () {
+  // Call the function to clear local storage
+  clearLocalStorage();
 });
+
+// Function to clear local storage
+function clearLocalStorage() {
+  // Clear local storage
+  localStorage.removeItem('workouts');
+  // Delete all workout markers from the map
+  map.eachLayer(function (layer) {
+    if (layer instanceof L.Marker) {
+      map.removeLayer(layer);
+    }
+  });
+  // Clear the rendered workout list
+  $('#worktype',).empty();
+}
+
+
+
+
+// // Reset list, confirmation form modal window. If "yes" button is clicked 
+// $('.clearLocalStorageBtn').on('click', function () {
+
+//   // function to clear local storage
+//   clearLocalStorage();
+// });
+
+// // Event listener when user clicks yes button to confirm to reset workouts
+// clearAllWorkouts.on('click', function () {
+//   //clear local storage 
+//   localStorage.removeItem('workouts');
+//   // delete all workouts from map
+//   map.eachLayer(function (layer) {
+//     if (layer instanceof L.Marker) {
+//       map.removeLayer(layer);
+//     }
+//   });
+
+//   //delete workout list 
+//   workoutdetailsdiv.innerHTML = '';
+// });
 
 
 //------------------------DISPLAY CURRENT TIME-----------------//
