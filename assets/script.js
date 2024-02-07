@@ -3,13 +3,13 @@ var currentDayEl = $('#currentDay');
 var running = $('.select-type');
 var distance = $('.input-distance');
 var duration = $('.input-duration');
-var formMyWorkout = $('.form-element');
+var myWorkoutForm = $('.form-element');
 var submitMyWorkout = $('.submitWorkout');
 
 
 // global variables
  let map;
- let workoutCoords;
+
  let workouts = [];
 
  //get position
@@ -46,23 +46,25 @@ if(navigator.geolocation){
       const lat = mapEvent.latlng.lat;
       const lng = mapEvent.latlng.lng;
         //create array to store lattitude and longitude
-        workoutCoords = [lat, lng];
+        const workoutCoords = [lat, lng];
+        renderWorkoutMarker(workoutCoords);
+        distance.focus();
 
-      workouts.forEach(work => {
-        renderWorkoutMarker(work);
-      });
+  
+      // workouts.forEach(work => {
+      //   renderWorkoutMarker(work);
+      // });
   
  })
-
-    distance.focus();
+  
 
  }
 
 
-function renderWorkoutMarker(newWorkout){
 
+function renderWorkoutMarker(workoutCoords){
 
-  L.marker(newWorkout.workoutCoords)
+  L.marker(workoutCoords)
   .addTo(map)
   .bindPopup(
     L.popup({
@@ -79,31 +81,37 @@ function renderWorkoutMarker(newWorkout){
 
   //////////////---------FORM submission -----///////////////////////////
 
+  let newWorkout;
+
 function handleFormSubmit(event) {
   event.preventDefault();
 
-  // Get form data
-  running.val();
-  distance.val();
-  duration.val();
+  // Clear input fields
+  running.val('');
+  distance.val('');
+  duration.val('');
 
   // Validate data (Ensure data is interger and valid)
-  if (isNaN(parseFloat(distance)) || isNaN(parseFloat(duration))) {
+  const distanceValue = parseFloat(distance.val());
+  const durationValue = parseFloat(duration.val());
+  if (isNaN(distanceValue) || isNaN(durationValue)) {
     return;
   }
 
-  // Generate new workout obj//
-  var newWorkout = {
-    type: type,
-    distance: parseFloat(distance),
-    duration: parseFloat(duration),
+  // Generate new workout obj
+  newWorkout = {
+    type: running.val(),
+    distance: distanceValue,
+    duration: durationValue,
     timestamp: dayjs().format('MMMM D')
   };
+
 
   // Add new workout obj workouts array
   workouts.push(newWorkout);
 
   renderWorkoutMarker(newWorkout);
+  renderWorkout(newWorkout);
 
   // Save to local storage
   localStorage.setItem('workouts', JSON.stringify(workouts));
@@ -112,17 +120,10 @@ function handleFormSubmit(event) {
 }
 
 //event listener for submission//
-submitMyWorkout.on('click', handleFormSubmit);
+myWorkoutForm.on('submit', handleFormSubmit);
 
 
-
-
-// $("li").click(function() {
-//   var myid = $(this).attr("id");
-// console.log(myid);
-// });
-
-function renderWorkout(workout) {
+function renderWorkout(newWorkout) {
   let html = `
     <li class="workout workout-running" data-id="">
       <h2 class="workout-title">${workout.type}</h2>
@@ -142,7 +143,18 @@ function renderWorkout(workout) {
 }
 
 
-//--------------------------------------//
+//----------------LOCAL STORAGE----------------------//
+
+ function getDataFromLocalStorage() {
+  const data = JSON.parse(localStorage.getItem('workouts'));
+
+  if (!data) return;
+  workouts = data;
+  workouts.forEach(workout => {
+    renderWorkout(workout);
+  });
+}
+
 
 
 
@@ -157,6 +169,7 @@ clearAllWorkouts.on('click', function () {
 });
 
 
+//------------------------DISPLAY CURRENT TIME-----------------//
 
 //handle displaying the time
 function displayCurrentTime() {
@@ -217,7 +230,7 @@ const weatherDataEl = $("#weather-data"); // Select the element with ID "weather
 
 const cityInputEl = $("#city-input"); // Select the element with ID "city-input"
 
-const formEl = $("form"); // Select the form element
+const formEl = $("#weatherForm"); // Select the form element
 
 formEl.on("submit", (event) => {
   event.preventDefault(); // Prevent the default form submission behavior
