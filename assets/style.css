@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  font-family: "Courier New", Courier, monospace;
+ /* font-family: "Courier New", Courier, monospace; */
   min-height: 100vh;
   background-color: #fff;
   padding: 2.5rem;
