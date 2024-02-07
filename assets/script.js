@@ -173,7 +173,7 @@ clearAllWorkouts.on('click', function () {
 
 //handle displaying the time
 function displayCurrentTime() {
-  let rightNow = dayjs().format('dddd, MMMM D');
+  let rightNow = dayjs().format('DD/MM/YYYY');
   currentDayEl.text(rightNow);
 }
 
