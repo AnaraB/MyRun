@@ -24,7 +24,7 @@
     <div class="container">
    <div class="row">
  
-    <div class="sidebar col">
+    <div class="sidebar col-5">
       <div class="logo text-center mb-5">
           <!-- logo img here -->
           <img class="logo" src="./assets/Myrun.svg" width="70px" height="70px" alt="">
@@ -35,7 +35,7 @@
 <br>
        <!-- Workout form  -->
        <ul class="workouts">
-        <h5 class="instruction-line">Click on the map to show location workout and fill the form</h5>
+        <p class="instruction-line">Click on the map to save your location workout</p>
         <form class="row gy-2 gx-3 align-items-center form-bg form-element">
           <div class="col-auto ">
             <label class="visually-hidden" for="autoSizingSelect">Preference</label>
@@ -54,7 +54,7 @@
               <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="min">
           </div>
           <div class="col-auto">
-            <button type="submit" class="btn btn-primary submitWorkout">OK</button>
+            <button type="submit" class="btn btn-secondary" id="submitWorkout">Submit</button>
           </div>
         </form>
 
@@ -64,15 +64,9 @@
 
     <!-- Button trigger modal -->
     <div id="modalButtons">
-      <button 
-        type="button" 
-        class="btn btn-danger" 
-        data-bs-toggle="modal" 
-        data-bs-target="#resetBtn">
-        <i class="fa-solid fa-trash"></i>
-      </button>
-      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#inspirationalModel"><i class="fa-solid fa-quote-left"></i></button>
-      <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#weatherModel"><i class="fa-solid fa-cloud"></i></button>
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#resetBtn"><i class="fa-solid fa-trash"></i></button>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inspirationalModel"><i class="fa-solid fa-face-smile"></i></button>
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#weatherModel"><i class="fa-solid fa-cloud"></i></button>
     </div>
     <!-- Modal for Motivational quote-->
  <div class="modal" id="inspirationalModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
