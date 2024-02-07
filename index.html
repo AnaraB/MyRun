@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
+    <link rel="icon" type="image/png" href="MyRun/assets/Myrun.svg">
     <link
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
       rel="stylesheet"
@@ -13,10 +13,12 @@
     <!-- bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <link rel="stylesheet" href="assets/style.css" />
+    <link rel="icon"href="./assets/Myrun.svg">
 
-    <title>MuRun</title>
+    <title>MyRun</title>
   </head>
   <body>
     <div class="container">
@@ -25,10 +27,12 @@
     <div class="sidebar col-5">
       <div class="logo text-center mb-5">
           <!-- logo img here -->
+          <img class="logo" src="./assets/Myrun.svg" width="70px" height="70px" alt="">
         <h1>MyRun</h1>
         <p id="currentDay"></p>
       </div>
-
+<br>
+<br>
        <!-- Workout form  -->
        <ul class="workouts">
         <p class="instruction-line">Click on the map to save your location workout</p>
@@ -60,6 +64,7 @@
 
     <!-- Button trigger modal -->
     <div id="modalButtons">
+
       <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#resetBtn"><i class="fa-solid fa-trash"></i></button>
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inspirationalModel"><i class="fa-solid fa-face-smile"></i></button>
       <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#weatherModel"><i class="fa-solid fa-cloud"></i></button>
