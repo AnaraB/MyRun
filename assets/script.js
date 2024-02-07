@@ -174,6 +174,9 @@ $('.clearLocalStorageBtn').on('click', function () {
   clearLocalStorage();
 });
 
+
+
+
 // Function to clear local storage
 function clearLocalStorage() {
   // Clear local storage
@@ -193,7 +196,7 @@ function clearLocalStorage() {
 
 //handle displaying the time
 function displayCurrentTime() {
-  let rightNow = dayjs().format('dddd, MMMM D');
+  let rightNow = dayjs().format('DD/MM/YYYY');
   currentDayEl.text(rightNow);
 }
 
