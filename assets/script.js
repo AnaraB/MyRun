@@ -5,127 +5,138 @@ var distance = $('.input-distance');
 var duration = $('.input-duration');
 var myWorkoutForm = $('.form-element');
 var submitMyWorkout = $('.submitWorkout');
-
+var form = document.getElementsByClassName("form-element")[0];
 
 // global variables
- let map;
+let map;
 
- let workouts = [];
+let workouts = [];
+let lat;
+let lng;
 
- //get position
-if(navigator.geolocation){
+//get position
+if (navigator.geolocation) {
   navigator.geolocation.getCurrentPosition(
-    function(position){
+    function (position) {
       //if position is available load map
       loadMap(position)
     },
 
-   function(){
-   alert('Could not get your position');
-  }
+    function () {
+      alert('Could not get your position');
+    }
   )
 
 }
 
 
- function loadMap(position){
- const  latitude = position.coords.latitude;
+function loadMap(position) {
+  const latitude = position.coords.latitude;
   const longitude = position.coords.longitude;
 
   const coords = [latitude, longitude];
   //store result of set map in the map variable
-   map = L.map('map').setView( coords, 16);
+  map = L.map('map').setView(coords, 16);
 
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
 
-    //add eventListener created by leflet library, it listens to click event on the map
-    map.on('click', function(mapEvent){
-      //get coordinates of the point where it was clicked
-      const lat = mapEvent.latlng.lat;
-      const lng = mapEvent.latlng.lng;
-        //create array to store lattitude and longitude
-        const workoutCoords = [lat, lng];
-        renderWorkoutMarker(workoutCoords);
-        distance.focus();
+  //add eventListener created by leflet library, it listens to click event on the map
+  map.on('click', function (mapEvent) {
+    //get coordinates of the point where it was clicked
+    lat = mapEvent.latlng.lat;
+    lng = mapEvent.latlng.lng;
+    //create array to store lattitude and longitude
+    const workoutCoords = [lat, lng];
+    renderWorkoutMarker(workoutCoords);
+    distance.focus();
 
-  
-      // workouts.forEach(work => {
-      //   renderWorkoutMarker(work);
-      // });
-  
- })
-  
+  })
 
- }
-
-
-
-function renderWorkoutMarker(workoutCoords){
-
-  L.marker(workoutCoords)
-  .addTo(map)
-  .bindPopup(
-    L.popup({
-      maxWidth: 250,
-      minWidth: 100,
-       closeOnClick: false,
-    })
-  )
-  .setPopupContent('Workout')
-  .openPopup();
 
 }
 
 
-  //////////////---------FORM submission -----///////////////////////////
 
-  let newWorkout;
+function renderWorkoutMarker(workoutCoords) {
+
+  L.marker(workoutCoords)
+    .addTo(map)
+    .bindPopup(
+      L.popup({
+        maxWidth: 250,
+        minWidth: 100,
+        closeOnClick: false,
+      })
+    )
+    .setPopupContent('Workout')
+    .openPopup();
+
+}
+
+
+//////////////---------FORM submission -----///////////////////////////
+
+let newWorkout;
 
 function handleFormSubmit(event) {
   event.preventDefault();
 
-  // Clear input fields
-  running.val('');
-  distance.val('');
-  duration.val('');
+  // Get form data
+var type = $('#autoSizingSelect').val();
+var distance = $('#autoSizingInput').val();
+var duration = $('#autoSizingInputGroup').val();
 
-  // Validate data (Ensure data is interger and valid)
-  const distanceValue = parseFloat(distance.val());
-  const durationValue = parseFloat(duration.val());
-  if (isNaN(distanceValue) || isNaN(durationValue)) {
+
+  // Validate data (Ensure data is integer and valid)
+
+  if (isNaN(parseFloat(distance)) || isNaN(parseFloat(duration))) {
     return;
   }
 
   // Generate new workout obj
-  newWorkout = {
-    type: running.val(),
-    distance: distanceValue,
-    duration: durationValue,
-    timestamp: dayjs().format('MMMM D')
+  var newWorkout = {
+    type: type,
+    distance: parseFloat(distance),
+    duration: parseFloat(duration),
+    timestamp: dayjs().format('MMMM D'),
+    lat: parseFloat(lat),
+    lng: parseFloat(lng),
   };
 
-
-  // Add new workout obj workouts array
+  // Add new workout obj to workouts array
   workouts.push(newWorkout);
-
-  renderWorkoutMarker(newWorkout);
-  renderWorkout(newWorkout);
 
   // Save to local storage
   localStorage.setItem('workouts', JSON.stringify(workouts));
 
+  // Add marker to the map based on lat/lng
+  const workoutsCoords = [lat, lng];
+  L.marker(workoutsCoords)
+    .addTo(map)
+    .bindPopup(
+      L.popup({
+        maxWidth: 250,
+        minWidth: 100,
+        closeOnClick: false,
+      })
+    )
+    .setPopupContent(`Distance: ${newWorkout.distance} km<br>Duration: ${newWorkout.duration} mins`)
+    .openPopup();
 
+  // Render the workout on the list
+  renderWorkout(newWorkout);
 }
+
 
 //event listener for submission//
 myWorkoutForm.on('submit', handleFormSubmit);
 
 
-function renderWorkout(newWorkout) {
+function renderWorkout(workout) {
   let html = `
-    <li class="workout workout-running" data-id="">
+    <li class="workout workout-running" data-id="" id="worktype">
       <h2 class="workout-title">${workout.type}</h2>
       <div class="workout-details">
         <span class="workout-icon">🏃‍♂️</span>
@@ -145,7 +156,7 @@ function renderWorkout(newWorkout) {
 
 //----------------LOCAL STORAGE----------------------//
 
- function getDataFromLocalStorage() {
+function getDataFromLocalStorage() {
   const data = JSON.parse(localStorage.getItem('workouts'));
 
   if (!data) return;
@@ -156,17 +167,51 @@ function renderWorkout(newWorkout) {
 }
 
 
-
-
-// Reset list, confirmation form modal window. If "yes" button is clicked 
-var  clearAllWorkouts = $('clearLocalStorageBtn');
-
-// Event listener when user clicks yes button to confirm to reset workouts
-clearAllWorkouts.on('click', function () {
- //clear local storage 
- // delete all workouts from map
- //delete workout list 
+//----- clear storage----
+// Event listener for the "Yes" button in the modal to clear local storage
+$('.clearLocalStorageBtn').on('click', function () {
+  // Call the function to clear local storage
+  clearLocalStorage();
 });
+
+// Function to clear local storage
+function clearLocalStorage() {
+  // Clear local storage
+  localStorage.removeItem('workouts');
+  // Delete all workout markers from the map
+  map.eachLayer(function (layer) {
+    if (layer instanceof L.Marker) {
+      map.removeLayer(layer);
+    }
+  });
+  // Clear the rendered workout list
+  $('#worktype',).empty();
+}
+
+
+
+
+// // Reset list, confirmation form modal window. If "yes" button is clicked 
+// $('.clearLocalStorageBtn').on('click', function () {
+
+//   // function to clear local storage
+//   clearLocalStorage();
+// });
+
+// // Event listener when user clicks yes button to confirm to reset workouts
+// clearAllWorkouts.on('click', function () {
+//   //clear local storage 
+//   localStorage.removeItem('workouts');
+//   // delete all workouts from map
+//   map.eachLayer(function (layer) {
+//     if (layer instanceof L.Marker) {
+//       map.removeLayer(layer);
+//     }
+//   });
+
+//   //delete workout list 
+//   workoutdetailsdiv.innerHTML = '';
+// });
 
 
 //------------------------DISPLAY CURRENT TIME-----------------//
