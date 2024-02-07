@@ -31,39 +31,29 @@
        <!-- Workout form  -->
        <ul class="workouts">
         <h5 class="instruction-line">Click on the map to show location workout and fill the form</h5>
-        <form class="row gy-2 gx-3 align-items-center form-bg">
+        <form class="row gy-2 gx-3 align-items-center form-bg form-element">
           <div class="col-auto ">
             <label class="visually-hidden" for="autoSizingSelect">Preference</label>
-            <select class="form-select" id="autoSizingSelect">
+            <select class="form-select select-type" id="autoSizingSelect">
               <option selected>Type</option>
               <option value="running">Running</option>
               <option value="cycling">Cycling</option>
             </select>
           </div>
           <div class="col-auto">
-            <label class="visually-hidden" for="autoSizingInput">Distance</label>
+            <label class="visually-hidden input-distance" for="autoSizingInput">Distance</label>
             <input type="text" class="form-control" id="autoSizingInput" placeholder="km">
           </div>
           <div class="col-auto">
-            <label class="visually-hidden" for="autoSizingInputGroup">Duration</label>
+            <label class="visually-hidden input-duration" for="autoSizingInputGroup">Duration</label>
               <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="min">
           </div>
           <div class="col-auto">
-            <button type="submit" class="btn btn-primary">OK</button>
+            <button type="submit" class="btn btn-primary submitWorkout">OK</button>
           </div>
         </form>
 
         <!-- dynamically generate workouts list here  -->
-
-        <!-- <li class="workout workout-running" data-id="">
-          <h2 class="workout-title">Running on April 14</h2>
-          <div class="workouDetails">
-            <span class="workoutDistance">5.2km</span>
-          </div>
-          <div class="workoutDetails">
-            <span class="workoutDuration">32min</span>
-          </div>
-        </li> -->
 
     </ul>
 

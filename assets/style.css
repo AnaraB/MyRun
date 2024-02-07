@@ -32,10 +32,10 @@ body {
   font-size: 1.5rem;
   color: #c7e3fa;
 }
+.form-bg {
+  background-color: #588157;
 
-.workouts {
-  list-style: none;
-  height: 77vh;
+  padding: 1rem ;
 }
 
 .instruction-line{
@@ -45,10 +45,9 @@ body {
 }
 
 
-.form-bg {
-  background-color: #588157;
-
-  padding: 1rem ;
+.workouts {
+  list-style: none;
+  height: 77vh;
 }
 
 #modalButtons {
@@ -56,6 +55,19 @@ body {
   justify-content: space-between;
 }
 
+                              /* NEW WORKOUT LIST ELEMENT */
+.workout {
+  background-color:  #7eda8ffd;
+  border-radius: 5px;
+  padding: 1.5rem 2.25rem;
+  margin-bottom: 1.75rem;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 0.75rem 1.5rem;
+}
+
+                                 /* MODAL WINDOWS */
 
 /* Inspirational quote styles */
 body {
@@ -91,12 +103,6 @@ body {
   font-style: italic;
 }
 
-/* .btn-small, .btn {
-  font-size: 25px; 
-  padding: 5px 10px; 
-  width: auto; 
-  margin-top: 10px; 
-}  */
 
 /* Weather model style */
 .details{
@@ -133,7 +139,7 @@ body {
   cursor: pointer;
 }
 
-/* Media Query */
+                                     /* MEDIA QUERY */
 @media (max-width: 768px) {
   .sidebar {
     padding: 2rem;

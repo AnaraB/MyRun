@@ -3,57 +3,146 @@ var currentDayEl = $('#currentDay');
 var running = $('.select-type');
 var distance = $('.input-distance');
 var duration = $('.input-duration');
+var formMyWorkout = $('.form-element');
+var submitMyWorkout = $('.submitWorkout');
 
 
 // global variables
-let latitude;
-let longitude;
+ let map;
+ let workoutCoords;
+ let workouts = [];
 
-//get position
-if(navigator.geolocation)
+ //get position
+if(navigator.geolocation){
   navigator.geolocation.getCurrentPosition(
-   function(position){
-   // console.log(position);
-    latitude = position.coords.latitude;
-    longitude = position.coords.longitude;
+    function(position){
+      //if position is available load map
+      loadMap(position)
+    },
 
-    const coords = [latitude, longitude];
-    
-  //store result of set map in the map variable
-    const map = L.map('map').setView( coords, 16);
-
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
-
-
-  //add eventListener created by leflet library, it listens to click event on the map
-  map.on('click', function(mapEvent){
-    //get coordinates of the point where it was clicked
-    const lat = mapEvent.latlng.lat;
-    const lng = mapEvent.latlng.lng;
-      //create array to store lattitude and longitude
-      const workoutsCoords = [lat, lng];
-    L.marker(workoutsCoords)
-    .addTo(map)
-    .bindPopup(
-      L.popup({
-        maxWidth: 250,
-        minWidth: 100,
-         closeOnClick: false,
-      })
-    )
-    .setPopupContent('Workout')
-    .openPopup();
-
-  })
-
-   }, 
    function(){
    alert('Could not get your position');
   }
   )
 
+}
+
+
+ function loadMap(position){
+ const  latitude = position.coords.latitude;
+  const longitude = position.coords.longitude;
+
+  const coords = [latitude, longitude];
+  //store result of set map in the map variable
+   map = L.map('map').setView( coords, 16);
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+    //add eventListener created by leflet library, it listens to click event on the map
+    map.on('click', function(mapEvent){
+      //get coordinates of the point where it was clicked
+      const lat = mapEvent.latlng.lat;
+      const lng = mapEvent.latlng.lng;
+        //create array to store lattitude and longitude
+        workoutCoords = [lat, lng];
+
+      workouts.forEach(work => {
+        renderWorkoutMarker(work);
+      });
+  
+ })
+
+    distance.focus();
+
+ }
+
+
+function renderWorkoutMarker(newWorkout){
+
+
+  L.marker(newWorkout.workoutCoords)
+  .addTo(map)
+  .bindPopup(
+    L.popup({
+      maxWidth: 250,
+      minWidth: 100,
+       closeOnClick: false,
+    })
+  )
+  .setPopupContent('Workout')
+  .openPopup();
+
+}
+
+
+  //////////////---------FORM submission -----///////////////////////////
+
+function handleFormSubmit(event) {
+  event.preventDefault();
+
+  // Get form data
+  running.val();
+  distance.val();
+  duration.val();
+
+  // Validate data (Ensure data is interger and valid)
+  if (isNaN(parseFloat(distance)) || isNaN(parseFloat(duration))) {
+    return;
+  }
+
+  // Generate new workout obj//
+  var newWorkout = {
+    type: type,
+    distance: parseFloat(distance),
+    duration: parseFloat(duration),
+    timestamp: dayjs().format('MMMM D')
+  };
+
+  // Add new workout obj workouts array
+  workouts.push(newWorkout);
+
+  renderWorkoutMarker(newWorkout);
+
+  // Save to local storage
+  localStorage.setItem('workouts', JSON.stringify(workouts));
+
+
+}
+
+//event listener for submission//
+submitMyWorkout.on('click', handleFormSubmit);
+
+
+
+
+// $("li").click(function() {
+//   var myid = $(this).attr("id");
+// console.log(myid);
+// });
+
+function renderWorkout(workout) {
+  let html = `
+    <li class="workout workout-running" data-id="">
+      <h2 class="workout-title">${workout.type}</h2>
+      <div class="workout-details">
+        <span class="workout-icon">🏃‍♂️</span>
+        <span class="workout-value">${workout.distance}</span>
+        <span class="workout-unit">km</span>
+      </div>
+      <div class="workout-details">
+        <span class="workout-icon">⏱</span>
+        <span class="workout-value">${workout.duration}</span>
+        <span class="workout-unit">min</span>
+      </div>
+      </li>
+  `;
+  form.insertAdjacentHTML('afterend', html);
+}
+
+
+//--------------------------------------//
 
 
 
