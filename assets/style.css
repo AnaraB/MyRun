@@ -1,3 +1,5 @@
+/* #4F4B65,#406E84,#2C9190,#4BB188,#8ECD72,#E2E062 */
+
 * {
   margin: 0;
   padding: 0;
@@ -18,8 +20,8 @@ body {
 
 /* SIDEBAR */
 .sidebar {
-  background-color: #3A5A40;
-  padding: 3rem 5rem 4rem 5rem;
+  background-color: #406E84;
+  padding: 1.5rem 3rem;
 }
 
 .logo {
@@ -33,7 +35,7 @@ body {
   color: #c7e3fa;
 }
 .form-bg {
-  background-color: #588157;
+  background-color: #cfc6c6;
 
   padding: 1rem ;
 }
@@ -50,9 +52,18 @@ body {
   height: 77vh;
 }
 
-#modalButtons {
+#submitWorkout {
+  background-color: #8ECD72;
+  font-size: 1.2rem;
+}
+.btn {
+  font-size: 1.6rem;
+}
+
+#modalButtons{
   display: flex;
   justify-content: space-between;
+
 }
 
                               /* NEW WORKOUT LIST ELEMENT */
