@@ -68,10 +68,10 @@
     </ul>
 
     <!-- Button trigger modal -->
-    <div>
-      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Reset</button>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inspirationalModel">Motivations</button>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#weatherModel">Current Weather</button>
+    <div id="modalButtons">
+      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#resetBtn">Reset</button>
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#inspirationalModel">Motivations</button>
+      <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#weatherModel">Weather</button>
     </div>
     <!-- Modal for Motivational quote-->
  <div class="modal" id="inspirationalModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -98,7 +98,7 @@
 </div>
 
 <!-- Modal to confirm clear local storage-->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="resetBtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
