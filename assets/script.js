@@ -1,8 +1,6 @@
 //save reference to import DOM elements
 var currentDayEl = $('#currentDay');
 var running = $('.select-type');
-var distance = $('.input-distance');
-var duration = $('.input-duration');
 var myWorkoutForm = $('.form-element');
 var submitMyWorkout = $('.submitWorkout');
 var form = document.getElementsByClassName("form-element")[0];
@@ -50,7 +48,7 @@ function loadMap(position) {
     //create array to store lattitude and longitude
     const workoutCoords = [lat, lng];
     renderWorkoutMarker(workoutCoords);
-    distance.focus();
+    $('.input-distance').focus();
 
   })
 
@@ -70,7 +68,7 @@ function renderWorkoutMarker(workoutCoords) {
         closeOnClick: false,
       })
     )
-    .setPopupContent('Workout')
+    .setPopupContent('workout')
     .openPopup();
 
 }
@@ -82,8 +80,11 @@ let newWorkout;
 
 function handleFormSubmit(event) {
   event.preventDefault();
+$('.input-distance').val('');
+$('.input-duration').val('');
+ 
 
-  // Get form data
+ // Get form data
 var type = $('#autoSizingSelect').val();
 var distance = $('#autoSizingInput').val();
 var duration = $('#autoSizingInputGroup').val();
@@ -127,6 +128,7 @@ var duration = $('#autoSizingInputGroup').val();
 
   // Render the workout on the list
   renderWorkout(newWorkout);
+
 }
 
 
@@ -137,7 +139,7 @@ myWorkoutForm.on('submit', handleFormSubmit);
 function renderWorkout(workout) {
   let html = `
     <li class="workout workout-running" data-id="" id="worktype">
-      <h2 class="workout-title">${workout.type}</h2>
+      <h4 class="workout-title">${workout.timestamp}</h4>
       <div class="workout-details">
         <span class="workout-icon">🏃‍♂️</span>
         <span class="workout-value">${workout.distance}</span>
@@ -156,16 +158,18 @@ function renderWorkout(workout) {
 
 //----------------LOCAL STORAGE----------------------//
 
+//render available workouts from local storage
+getDataFromLocalStorage()
+
 function getDataFromLocalStorage() {
   const data = JSON.parse(localStorage.getItem('workouts'));
-
+  console.log(data);
   if (!data) return;
   workouts = data;
   workouts.forEach(workout => {
     renderWorkout(workout);
   });
 }
-
 
 //----- clear storage----
 // Event listener for the "Yes" button in the modal to clear local storage
@@ -188,7 +192,8 @@ function clearLocalStorage() {
     }
   });
   // Clear the rendered workout list
-  $('#worktype',).empty();
+  $('#worktype').empty();
+  $('li').remove();
 }
 
 

@@ -36,8 +36,7 @@ body {
 }
 .form-bg {
   background-color: #cfc6c6;
-
-  padding: 1rem ;
+  padding: 0.8rem ;
 }
 
 .instruction-line{
@@ -69,21 +68,32 @@ body {
 
                               /* NEW WORKOUT LIST ELEMENT */
 .workout {
-  background-color:  #7eda8ffd;
-  border-radius: 5px;
-  padding: 1.5rem 2.25rem;
-  margin-bottom: 1.75rem;
+  background-color:#4BB188;
+  padding: 1.5rem;
+  margin: 1.5rem auto;
   cursor: pointer;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 0.75rem 1.5rem;
 }
 
 
-.workout__title {
-  font-size: 1.7rem;
-  font-weight: 600;
-  grid-column: 1 / -1;
+.workout-icon {
+  font-size: 1.8rem;
+  margin-right: 0.2rem;
+  height: 0.28rem;
+}
+
+.workout-value {
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+.workout-unit {
+  font-size: 1.1rem;
+  color: #4F4B65;
+  text-transform: uppercase;
+  font-weight: 800;
 }
 
                                  /* MODAL WINDOWS */
