@@ -14,11 +14,6 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <link rel="stylesheet" href="assets/style.css" />
-<!-- WeatherAPI -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-<link rel="stylesheet" href="assets/style.css" />
-
   <title>MuRun</title>
 </head>
 
@@ -33,26 +28,6 @@ integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" /
           <h1>MyRun</h1>
           <p id="currentDay"></p>
         </div>
-
-        <!-- Workout form  -->
-        <ul class="workouts">
-          <form class="row gy-2 gx-3 align-items-center form-bg">
-            <div class="col-auto ">
-              <label class="visually-hidden" for="autoSizingSelect">Preference</label>
-              <select class="form-select select-type" id="autoSizingSelect">
-                <option selected>Type</option>
-                <option value="running">Running</option>
-              </select>
-            </div>
-            <div class="col-auto">
-              <label class="visually-hidden input-distance" for="autoSizingInput">Distance</label>
-              <input type="text" class="form-control" id="autoSizingInput" placeholder="km">
-            </div>
-            <div class="col-auto">
-              <label class="visually-hidden input-duration" for="autoSizingInputGroup">Duration</label>
-
-
-
       <!-- Workout form  -->
         <ul class="workouts">
         <h5 class="instruction-line">Click on the map to show location workout and fill the form</h5>
@@ -153,7 +128,7 @@ integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" /
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal to confirm clear local storage-->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -165,8 +140,8 @@ integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" /
         Are you sure you want to reset all workout list?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+        <button type="button" class="btn btn-secondary clearLocalStorageBtn" data-bs-dismiss="modal">Yes</button>
+        <button type="button" class="btn btn-primary btn-sm">No, thank you</button>
       </div>
     </div>
   </div>

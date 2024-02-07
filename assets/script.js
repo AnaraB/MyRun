@@ -1,6 +1,4 @@
 
-// Save reference to import DOM elements
-let currentDayEl = document.getElementById('currentDay');
 
 //save reference to import DOM elements
 var currentDayEl = $('#currentDay');
