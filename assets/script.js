@@ -174,6 +174,9 @@ $('.clearLocalStorageBtn').on('click', function () {
   clearLocalStorage();
 });
 
+
+
+
 // Function to clear local storage
 function clearLocalStorage() {
   // Clear local storage
@@ -189,31 +192,6 @@ function clearLocalStorage() {
 }
 
 
-
-
-// // Reset list, confirmation form modal window. If "yes" button is clicked 
-// $('.clearLocalStorageBtn').on('click', function () {
-
-//   // function to clear local storage
-//   clearLocalStorage();
-// });
-
-// // Event listener when user clicks yes button to confirm to reset workouts
-// clearAllWorkouts.on('click', function () {
-//   //clear local storage 
-//   localStorage.removeItem('workouts');
-//   // delete all workouts from map
-//   map.eachLayer(function (layer) {
-//     if (layer instanceof L.Marker) {
-//       map.removeLayer(layer);
-//     }
-//   });
-
-//   //delete workout list 
-//   workoutdetailsdiv.innerHTML = '';
-// });
-
-
 //------------------------DISPLAY CURRENT TIME-----------------//
 
 //handle displaying the time
@@ -224,9 +202,6 @@ function displayCurrentTime() {
 
 // display currentTime
 setInterval(displayCurrentTime, 1000);
-
-
-
 
 ////////////////////////// fetching API's /////////////////////////////
 
