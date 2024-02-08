@@ -7,7 +7,7 @@ This project is the production of an app called ‘MyRun’. This app logs a use
 
 The app was designed as part of a project work completed by Aygerim, Eyram, Teddy and Esther on the Front-end web developer bootcamp. The app will be maintained by the developers. 
 
-The idea of creating this app came from the need for a reporting app for user's running activity. In the app, the user is presented with the ability to record the running activity that they have undertaken, including the distance covered and the time spent on the activity 
+The idea of creating this app came from the need for a reporting app for user's running activity. In the app, the user is presented with the ability to record the running activity that they have undertaken, including the distance covered and the time spent on the activity. In the app, locations are marked with markers on the map. 
 
 The app has a split layout with an interactive map spanning its right side, and a toolbar to its left side. The app shows the date in real time and provides self explanatory information on its usage. 
 
