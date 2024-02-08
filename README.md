@@ -26,8 +26,10 @@ As a user, I want to see all my workouts at a glance, so I can easily track my p
 
 As a user, I want also see my workouts on a map, so I can easily check where I work out the most. 
 
-Demo image: ![alt text](image-1.png)
-<img src="image-1.png" alt="Demo image">
+----------------------------------
+The following image demonstrates the web application's appearance and functionality:
+ ![demo of app, map with sidebar to log running workouts](image-1.png)
+
 Deployed link: <https://anarab.github.io/MyRun/>
 
 
