@@ -5,7 +5,7 @@ Application to record running or cycling workouts
 Project MyRun
 This project is the production of an app called ‘MyRun’. This app logs a user’s running activity and stores it in their local storage. 
 
-The app was designed as part of a project work completed by Aygerim, Eyram, Teddy and Esther on the Front-end web developer bootcamp. The app will be maintained by the developers. 
+The app was designed as part of a project work by Aygerim, Eyram, Teddy and Esther on the Front-end web developer bootcamp. The app will be maintained by the collaborators. 
 
 The idea of creating this app came from the need for a reporting app for user's running activity. In the app, the user is presented with the ability to record the running activity that they have undertaken, including the distance covered and the time spent on the activity. In the app, locations are marked with markers on the map. 
 
@@ -26,16 +26,8 @@ As a user, I want to see all my workouts at a glance, so I can easily track my p
 
 As a user, I want also see my workouts on a map, so I can easily check where I work out the most. 
 
+Demo image: ![alt text](image-1.png)
+<img src="image-1.png" alt="Demo image">
+Deployed link: <a href="https://anarab.github.io/MyRun">Deployed Link</a>
 
 
-
-
-
-*** User Story *** <br />
-As a user, I want to log my running workouts with location, distance and  time, so I can keep a log of all my running  activities. 
-
-As a user, I want to log my cycling workouts with location, distance and  time, so I can keep a log of all my cyciling activities. 
-
-As a user, I want to see all my workouts at a glance, so I can easily track my progress over time. 
-
-As a user, I want also see my workouts on a map, so I can easily check where I work out the most. 
