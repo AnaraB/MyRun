@@ -28,6 +28,6 @@ As a user, I want also see my workouts on a map, so I can easily check where I w
 
 Demo image: ![alt text](image-1.png)
 <img src="image-1.png" alt="Demo image">
-Deployed link: <a href="https://anarab.github.io/MyRun">Deployed Link</a>
+Deployed link: <https://anarab.github.io/MyRun/>
 
 
