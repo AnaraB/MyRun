@@ -1,4 +1,7 @@
-//save reference to import DOM elements
+'use strict';
+
+$(document).ready(function(){
+  //save reference to import DOM elements
 var currentDayEl = $('#currentDay');
 var running = $('.select-type');
 var myWorkoutForm = $('.form-element');
@@ -300,3 +303,6 @@ async function getWeatherData(cityValue) {
     weatherDataEl.find(".details").html(""); // Clear the HTML content of the element with class "details"
   }
 }
+
+
+})
