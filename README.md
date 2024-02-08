@@ -1,5 +1,5 @@
 # MyRun
-Application to record running or cycling workouts
+Application to record running workouts
 
 
 Project MyRun
@@ -19,7 +19,7 @@ Upon restart of the app, it asks for consent to use the user’s location. When 
 The app also has an added advantage of the weather feature. It can summarise the weather of any UK location of the user’s choice. The user is presented with the ability to select the location using the weather button. The weather of the chosen location is given in one click. This feature is easy to use and can be extremely beneficial to the user. 
 
 
-*** User Story *** <br />
+*** User Story *** 
 As a user, I want to log my running workouts with location, distance and  time, so I can keep a log of all my running  activities. 
 
 As a user, I want to see all my workouts at a glance, so I can easily track my progress over time. 
@@ -27,9 +27,22 @@ As a user, I want to see all my workouts at a glance, so I can easily track my p
 As a user, I want also see my workouts on a map, so I can easily check where I work out the most. 
 
 ----------------------------------
+
 The following image demonstrates the web application's appearance and functionality:
- ![demo of app, map with sidebar to log running workouts](image-1.png)
+ ![demo of app, map with sidebar to log running workouts](assets/MyRun_demo.png)
 
 Deployed link: <https://anarab.github.io/MyRun/>
+
+### Collaborators:
+* Aygerim Berdalieva
+
+* Eyram Tetteh
+ 
+* Esther Adeola Elujoba
+ 
+* Teddy F Willie
+
+ 
+
 
 
