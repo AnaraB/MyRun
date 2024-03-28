@@ -4,159 +4,294 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="icon" type="image/png" href="MyRun/assets/Myrun.svg">
+    <link rel="icon" type="image/png" href="MyRun/assets/Myrun.svg" />
     <link
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    />
     <!-- bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
     <!-- leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
     <link rel="stylesheet" href="assets/style.css" />
-    <link rel="icon"href="./assets/Myrun.svg">
+    <link rel="icon" href="./assets/Myrun.svg" />
 
     <title>MyRun</title>
   </head>
   <body>
     <div class="container">
-   <div class="row">
- 
-    <div class="sidebar col-5">
-      <div class="logo text-center mb-5">
-        <h1>MyRun</h1>
-        <p id="currentDay"></p>
-      </div>
-       <!-- Workout form  -->
-       <ul class="workouts">
-        <p class="instruction-line">Click on the map to save your location workout</p>
-        <form class="row gy-2 gx-3 align-items-center form-bg form-element">
-          <div class="col-auto ">
-            <label class="visually-hidden" for="autoSizingSelect">Preference</label>
-            <select class="form-select select-type" id="autoSizingSelect">
-              <option selected>Type</option>
-              <option value="running">Running</option>
-             <!-- <option value="cycling">Cycling</option> -->
-            </select>
+      <div class="row">
+        <div class="sidebar col-5">
+          <div class="logo text-center mb-5">
+            <h1>MyRun</h1>
+            <p id="currentDay"></p>
           </div>
-          <div class="col-auto">
-            <label class="visually-hidden input-distance" for="autoSizingInput">Distance</label>
-            <input type="text" class="form-control" id="autoSizingInput" placeholder="km">
-          </div>
-          <div class="col-auto">
-            <label class="visually-hidden input-duration" for="autoSizingInputGroup">Duration</label>
-              <input type="text" class="form-control" id="autoSizingInputGroup" placeholder="min">
-          </div>
-          <div class="col-auto">
-            <button type="submit" class="btn btn-secondary" id="submitWorkout">Submit</button>
-          </div>
-        </form>
-
-  
-
-    </ul>
-
-    <!-- Button trigger modal -->
-    <div id="modalButtons">
-      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#resetBtn"><i class="fa-solid fa-trash"></i></button>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#inspirationalModel"><i class="fa-solid fa-face-smile"></i></button>
-      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#weatherModel"><i class="fa-solid fa-cloud"></i></button>
-    </div>
-    <!-- Modal for Motivational quote-->
- <div class="modal" id="inspirationalModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Inspirational Quote</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Inspirational quote -->
-        <div class="Mycontainer">
-          <h1 class="heading">Inspirational Quote</h1>
-          <h2 class="quote">
-            <span id="quote">Quote</span>
-          </h2>
-          <p class="author" id="author">~ Author</p>
-        </div>
-        <button class="btn" id="btn">Get a quote</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal to confirm clear local storage-->
-<div class="modal fade" id="resetBtn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to reset all workout list?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary clearLocalStorageBtn" data-bs-dismiss="modal">Yes</button>
-        <button type="button" class="btn btn-primary btn-sm">No, thank you</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal for weather popup-->
-<div class="modal" id="weatherModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Weather</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="container">
-          <h1>Current Weather</h1>
-          <form id="weatherForm">
-            <input type="text" id="city-input" placeholder="Enter City" />
-            <input type="submit" value="Get Weather" id="getWeatherBtn"/>
-          </form>
-          <div id="weather-data">
-            <div class="icon">
-              <!-- <img src="http://openweathermap.org/img/wn/01d.png" alt="Weather Icon"> -->
+          <!-- Workout form  -->
+          <div class="workouts-container">
+            <ul class="workouts">
+              <p class="instruction-line">
+                Click on the map to save your location workout
+              </p>
+              <form
+                class="row gy-2 gx-3 align-items-center form-bg form-element"
+                id="form-input-details"
+              >
+                <div class="col-auto">
+                  <label class="visually-hidden" for="autoSizingSelect"
+                    >Preference</label
+                  >
+                  <select class="form-select select-type" id="autoSizingSelect">
+                    <option selected>Type</option>
+                    <option value="running">Running</option>
+                    <!-- <option value="cycling">Cycling</option> -->
+                  </select>
+                </div>
+                <div class="col-auto">
+                  <label
+                    class="visually-hidden input-distance"
+                    for="autoSizingInput"
+                    >Distance</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="autoSizingInput"
+                    placeholder="km"
+                  />
+                </div>
+                <div class="col-auto">
+                  <label
+                    class="visually-hidden input-duration"
+                    for="autoSizingInputGroup"
+                    >Duration</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="autoSizingInputGroup"
+                    placeholder="min"
+                  />
+                </div>
+                <div class="col-auto">
+                  <button
+                    type="submit"
+                    class="btn btn-secondary"
+                    id="submitWorkout"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </form>
+            </ul>
+            <!-- Button trigger modal -->
+            <div id="modalButtons">
+              <button
+                type="button"
+                class="btn btn-danger"
+                data-bs-toggle="modal"
+                data-bs-target="#resetBtn"
+              >
+                <i class="fa-solid fa-trash"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#inspirationalModel"
+              >
+                <i class="fa-solid fa-face-smile"></i>
+              </button>
+              <button
+                type="button"
+                class="btn btn-success"
+                data-bs-toggle="modal"
+                data-bs-target="#weatherModel"
+              >
+                <i class="fa-solid fa-cloud"></i>
+              </button>
             </div>
-            <div class="temperature"></div>
-            <div class="description"></div>
-            <div class="details">
-              <!-- <div>Feels like: 23°C</div>
+          </div>
+
+          <!-- Modal for Motivational quote-->
+          <div
+            class="modal"
+            id="inspirationalModel"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Inspirational Quote
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Inspirational quote -->
+                  <div class="Mycontainer">
+                    <h1 class="heading">Inspirational Quote</h1>
+                    <h2 class="quote">
+                      <span id="quote">Quote</span>
+                    </h2>
+                    <p class="author" id="author">~ Author</p>
+                  </div>
+                  <button class="btn" id="btn">Get a quote</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal to confirm clear local storage-->
+          <div
+            class="modal fade"
+            id="resetBtn"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Confirmation
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  Are you sure you want to reset all workout list?
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary clearLocalStorageBtn"
+                    data-bs-dismiss="modal"
+                  >
+                    Yes
+                  </button>
+                  <button type="button" class="btn btn-primary btn-sm">
+                    No, thank you
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal for weather popup-->
+          <div
+            class="modal"
+            id="weatherModel"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    Weather
+                  </h1>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="container">
+                    <h1>Current Weather</h1>
+                    <form id="weatherForm">
+                      <input
+                        type="text"
+                        id="city-input"
+                        placeholder="Enter City"
+                      />
+                      <input
+                        type="submit"
+                        value="Get Weather"
+                        id="getWeatherBtn"
+                      />
+                    </form>
+                    <div id="weather-data">
+                      <div class="icon">
+                        <!-- <img src="http://openweathermap.org/img/wn/01d.png" alt="Weather Icon"> -->
+                      </div>
+                      <div class="temperature"></div>
+                      <div class="description"></div>
+                      <div class="details">
+                        <!-- <div>Feels like: 23°C</div>
                     <div>Humidity: 40%</div>
                     <div>Wind speed: 5 m/s</div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        <!-- close div sidebar -->
+        <div id="map" class="col"></div>
       </div>
+      <!-- close div row -->
     </div>
-  </div>
-</div>
+    <!-- close div container -->
 
-   </div>   <!-- close div sidebar --> 
-        <div id="map" class="col"></div> 
-    </div>   <!-- close div row -->
-  </div>     <!-- close div container -->
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Day.js -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
 
-  <!-- jQuery -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-     <!-- Day.js -->
-  <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <!-- leaflet library -->
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
 
-  <!-- leaflet library -->
-  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Bootstrap -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
 
-  <!-- Bootstrap -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-
-  <script defer src="assets/script.js"></script>
+    <script defer src="assets/script.js"></script>
   </body>
 </html>
